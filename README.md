@@ -40,7 +40,7 @@ This software requires a server running PHP and a MySQL (or compatible) database
 * `toread.html` -- HTML partial for Angular
 * `toread.ini` -- configuration file
 * `toread.js` -- Angular app
-* `toread.php` -- App boilerplate; for legacy reasons this has a PHP extension
+* `toread.php` -- App boilerplate
 * `toread.sql` -- database schema
 
 ## Legal
