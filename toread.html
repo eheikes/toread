@@ -10,7 +10,7 @@
     </span>
     <a href ng-click="chooseRandom()">Choose one for me</a>.
   </p>
-  <p>
+  <p class="all-tags">
     <a href ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" class="label tag-{{tag.name | dasherize}}" ng-class="{faded: tagFilter && tagFilter != tag.id}">{{tag.name}}</a>
   </p>
   <div id="controls" class="row form-inline">
