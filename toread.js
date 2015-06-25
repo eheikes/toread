@@ -90,7 +90,7 @@ module.directive('list', function($timeout, toreadService) {
           q: scope.q,
           tag: scope.tagFilter,
           offset: scope.offset,
-          limit: scope.limit
+          count: scope.limit
         }).then(function(response) {
           scope.tags       = response.tags;
           scope.entries    = response.links;
