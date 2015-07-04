@@ -128,3 +128,11 @@ module.directive('list', function($timeout, toreadService) {
     }
   }
 });
+
+module.directive('controls', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'toreadcontrols.html',
+    link: function(scope, element, attrs) {}
+  };
+});

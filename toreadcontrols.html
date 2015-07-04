@@ -1,0 +1,18 @@
+<div id="controls" class="row form-inline">
+  <div class="col-md-6">
+    <input class="btn btn-default" type="button" value="← Previous" ng-click="changePage(-1)" ng-disabled="actionInProgress || offset == 0">
+    <input class="btn btn-default" type="button" value="Next →" ng-click="changePage(1)" ng-disabled="actionInProgress || offset + limit >= info.total">
+    <input class="btn btn-default" type="button" value="Delete selected" ng-click="deleteSelected()" ng-disabled="actionInProgress || selectedItems.length == 0">
+  </div>
+  <div class="col-md-6">
+    <div id="search" class="input-group has-feedback">
+      <input class="form-control" ng-class="{'alert-info': q != ''}" type="text" value="" placeholder="Search" ng-model="q" ng-change="showList()" ng-disabled="actionInProgress">
+      <span class="glyphicon glyphicon-search form-control-feedback" ng-class="{hidden: q != ''}" aria-hidden="true"></span>
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-class="{hidden: q == ''}" type="button" aria-label="Clear search" ng-click="clearSearch()">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+      </span>
+    </div>
+  </div>
+</div>

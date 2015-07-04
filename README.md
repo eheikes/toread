@@ -38,6 +38,7 @@ This software requires a server running PHP and a MySQL (or compatible) database
 ## File Manifest
 
 * `toread.html` -- HTML partial for Angular
+* `toreadcontrols.html` -- HTML partial for Angular
 * `toread.ini` -- configuration file
 * `toread.js` -- Angular app
 * `toread.php` -- App boilerplate

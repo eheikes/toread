@@ -13,24 +13,7 @@
   <p class="all-tags">
     <a href ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" class="label tag-{{tag.name | dasherize}}" ng-class="{faded: tagFilter && tagFilter != tag.id}">{{tag.name}}</a>
   </p>
-  <div id="controls" class="row form-inline">
-    <div class="col-md-6">
-      <input class="btn btn-default" type="button" value="← Previous" ng-click="changePage(-1)" ng-disabled="actionInProgress || offset == 0">
-      <input class="btn btn-default" type="button" value="Next →" ng-click="changePage(1)" ng-disabled="actionInProgress || offset + limit >= info.total">
-      <input class="btn btn-default" type="button" value="Delete selected" ng-click="deleteSelected()" ng-disabled="actionInProgress || selectedItems.length == 0">
-    </div>
-    <div class="col-md-6">
-      <div id="search" class="input-group has-feedback">
-        <input class="form-control" ng-class="{'alert-info': q != ''}" type="text" value="" placeholder="Search" ng-model="q" ng-change="showList()" ng-disabled="actionInProgress">
-        <span class="glyphicon glyphicon-search form-control-feedback" ng-class="{hidden: q != ''}" aria-hidden="true"></span>
-        <span class="input-group-btn">
-          <button class="btn btn-default" ng-class="{hidden: q == ''}" type="button" aria-label="Clear search" ng-click="clearSearch()">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          </button>
-        </span>
-      </div>
-    </div>
-  </div>
+  <controls></controls>
   <ul class="entries">
     <li ng-repeat="item in entries" ng-class="{highlight: item.highlighted}">
       <input type="checkbox" name="id[]" checklist-model="selectedItems" value="{{item.id}}" checklist-value="item.id" ng-disabled="actionInProgress">
@@ -44,4 +27,5 @@
       <p class="description" ng-if="item.description">{{item.description}}</p>
     </li>
   </ul>
+  <controls></controls>
 </div>
