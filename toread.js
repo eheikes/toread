@@ -117,9 +117,10 @@ module.directive('list', function($timeout, toreadService) {
         });
       };
 
-      scope.clearSearch = function() {
+      scope.clearSearch = function(event) {
         scope.q = '';
         scope.showList();
+        angular.element(event.target).parents('.search').find('input[name="q"]').focus();
       };
 
       scope.$on('refreshList', scope.showList);
