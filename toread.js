@@ -117,6 +117,11 @@ module.directive('list', function($timeout, toreadService) {
         });
       };
 
+      scope.clearSearch = function() {
+        scope.q = '';
+        scope.showList();
+      };
+
       scope.$on('refreshList', scope.showList);
 
       scope.showList();
