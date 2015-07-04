@@ -19,9 +19,9 @@
       .highlight { background: yellow; }
       ul.entries { margin-left: 0; padding-left: 0; }
       ul.entries li { list-style: none; padding: 0.15em 0.25em; }
-      #controls > div { margin-bottom: 15px; }
-      #search { width: 100%; }
-      #search input { width: 100%; }
+      .controls > div { margin-bottom: 15px; }
+      .search { width: 100%; }
+      .search input { width: 100%; }
       #add-new-link { margin-bottom: 15px; }
     </style>
   </head>
