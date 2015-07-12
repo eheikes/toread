@@ -23,7 +23,7 @@ This originally began as a single PHP script, but was then rewritten in Angular 
 This software requires a server running PHP and a MySQL (or compatible) database.
 
 1. Create a new database using the `toread.sql` schema.
-2. Modify the `toread.ini` file with your database configuration.
+2. Modify the `toread.ini` file with your server+database configuration.
 3. Copy all files (except `toread.sql`) to your server.
 4. Make sure that `toread.ini` is not accessible from the web! Here is an example for Apache:
 

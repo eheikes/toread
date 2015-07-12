@@ -1,5 +1,9 @@
 var module = angular.module('toRead', ['ngResource', 'checklist-model']);
 
+module.config(function($locationProvider) {
+  $locationProvider.html5Mode(true);
+});
+
 module.factory('toreadFactory', function($resource) {
   return $resource('toreadapi.php');
 });
@@ -44,24 +48,47 @@ module.controller('addController', function($scope, toreadService) {
   }
 });
 
-module.directive('list', function($timeout, toreadService) {
+module.directive('list', function($location, $window, $timeout, toreadService) {
   return {
     restrict: 'E',
     templateUrl: 'toread.html',
     link: function(scope, element, attrs) {
+      // Returns the current value from the URL parameters,
+      //   or the default value if not set yet.
+      var getParamOrDefault = function(name, defaultVal, convertToInt) {
+        var params = $location.search();
+        if (typeof params[name] === 'undefined') {
+          return defaultVal;
+        }
+        if (convertToInt) {
+          return parseInt(params[name], 10);
+        }
+        return params[name];
+      };
+
       scope.moment = moment;
       scope.tags = [];
       scope.entries = [];
       scope.info = {};
       scope.selectedItems = [];
       scope.actionInProgress = false;
-      scope.offset = 0;
-      scope.limit = 20;
-      scope.tagFilter = null;
-      scope.q = ''; // search query
+      scope.offset = getParamOrDefault('offset', 0, true);
+      scope.limit = getParamOrDefault('limit', 20, true);
+      scope.tagFilter = getParamOrDefault('tag', null, true);
+      scope.q = getParamOrDefault('q', ''); // search query
 
       var random = function(lo, hi) {
         return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+      };
+
+      var pushState = function() {
+        var params = {
+          limit: scope.limit,
+          offset: scope.offset,
+          q: scope.q,
+          tag: scope.tagFilter
+        }
+        $location.search(params);
       };
 
       scope.chooseRandom = function() {
@@ -96,6 +123,7 @@ module.directive('list', function($timeout, toreadService) {
           scope.entries    = response.links;
           scope.info       = response.stats;
           scope.info.total = response.total;
+          pushState();
         });
       };
 
