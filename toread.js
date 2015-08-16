@@ -76,6 +76,7 @@ module.directive('list', function($location, $window, $timeout, toreadService) {
       scope.limit = getParamOrDefault('limit', 20, true);
       scope.tagFilter = getParamOrDefault('tag', null, true);
       scope.q = getParamOrDefault('q', ''); // search query
+      scope.highlighted = getParamOrDefault('highlighted', null);
 
       var random = function(lo, hi) {
         return Math.floor(Math.random() * (hi - lo + 1)) + lo;
@@ -83,6 +84,7 @@ module.directive('list', function($location, $window, $timeout, toreadService) {
 
       var pushState = function() {
         var params = {
+          highlighted: scope.highlighted,
           limit: scope.limit,
           offset: scope.offset,
           q: scope.q,
@@ -91,18 +93,26 @@ module.directive('list', function($location, $window, $timeout, toreadService) {
         $location.search(params);
       };
 
+      // Highlight the nth item in the list (starting at 0)
+      //   and scroll the screen to its position.
+      var highlightOffset = function(n) {
+        scope.entries[n].highlighted = true;
+        $timeout(function() {
+          $('html,body').animate({
+            scrollTop: $('ul.entries li').eq(n).offset().top
+          }, 500);
+        });
+      };
+
       scope.chooseRandom = function() {
         var chosenIndex = random(0, scope.info.total - 1);
         var remainder = chosenIndex % scope.limit;
 
         scope.offset = parseInt(chosenIndex / scope.limit, 10) * scope.limit;
         scope.showList().then(function() {
-          scope.entries[remainder].highlighted = true;
-          $timeout(function() {
-            $('html,body').animate({
-              scrollTop: $('ul.entries li').eq(remainder).offset().top
-            }, 500);
-          });
+          scope.highlighted = remainder;
+          pushState();
+          highlightOffset(remainder);
         });
       };
 
@@ -153,7 +163,11 @@ module.directive('list', function($location, $window, $timeout, toreadService) {
 
       scope.$on('refreshList', scope.showList);
 
-      scope.showList();
+      scope.showList().then(function() {
+        if (scope.highlighted) {
+          highlightOffset(scope.highlighted);
+        }
+      });
     }
   }
 });
