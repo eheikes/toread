@@ -1,6 +1,18 @@
 <?php
   $config = parse_ini_file('toread.ini');
 
+  // utf8ize written by Konstantin (http://stackoverflow.com/a/26760943).
+  function utf8ize($mixed) {
+    if (is_array($mixed)) {
+      foreach ($mixed as $key => $value) {
+        $mixed[$key] = utf8ize($value);
+      }
+    } else if (is_string ($mixed)) {
+      return utf8_encode($mixed);
+    }
+    return $mixed;
+  }
+
   // Retrieves the categories.
   function getCategories() {
     global $dbh;
@@ -330,7 +342,7 @@
   $data = $func();
 
   header('Content-Type: application/json');
-  $encoded = json_encode($data);
+  $encoded = json_encode(utf8ize($data));
   if (!$encoded) {
     $data['links'] = array(array(
       'id' => json_last_error(),
