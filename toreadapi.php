@@ -330,5 +330,20 @@
   $data = $func();
 
   header('Content-Type: application/json');
-  echo json_encode($data);
+  $encoded = json_encode($data);
+  if (!$encoded) {
+    $data['links'] = array(array(
+      'id' => json_last_error(),
+      'title' => 'API ERROR: ' . json_last_error_msg(),
+      'link' => 'http://php.net/manual/en/function.json-last-error.php',
+      'description' => null,
+      'time' => date('c'),
+      'created' => time(),
+      'deleted' => false,
+      'tags' => array()
+    ));
+    $data['total'] = 1;
+    $encoded = json_encode($data);
+  }
+  echo $encoded;
 ?>
