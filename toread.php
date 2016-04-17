@@ -40,7 +40,7 @@
             <fieldset ng-disabled="isSaving">
               <div class="form-group">
                 <label for="new-url" title="Link URL">URL</label>
-                <input id="new-url" type="text" name="url" ng-model="data.url" value="" class="form-control">
+                <input id="new-url" type="text" name="url" ng-model="data.url" value="" class="form-control" accesskey="n">
               </div>
               <div class="form-group">
                 <label for="new-tags" title="Link tags (separate with commas)">Tags</label>
