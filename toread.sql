@@ -16,9 +16,9 @@ DROP TABLE IF EXISTS `link_categories`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `link_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL,
+  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -31,12 +31,12 @@ DROP TABLE IF EXISTS `links`;
 CREATE TABLE `links` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `created` datetime NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deleted` datetime DEFAULT NULL,
-  `keywords` text,
+  `keywords` text COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `links_to_categories` (
   `link_id` int(10) unsigned NOT NULL DEFAULT '0',
   `category_id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`link_id`,`category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
