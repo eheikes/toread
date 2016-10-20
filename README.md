@@ -39,15 +39,17 @@ This software requires a server running PHP and a MySQL (or compatible) database
 ## File Manifest
 
 * `toread.html` -- HTML partial for Angular
-* `toreadcontrols.html` -- HTML partial for Angular
 * `toread.ini` -- configuration file
 * `toread.js` -- Angular app
 * `toread.php` -- App boilerplate
 * `toread.sql` -- database schema
+* `toreadapi.php` -- API backend
+* `toreadcontrols.html` -- HTML partial for Angular
+* `toreadsnapshot.php` -- snapshot view for a link
 
 ## Legal
 
-Copyright 2015 Eric Heikes.
+Copyright 2015-2016 Eric Heikes.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this software except in compliance with the License. You may obtain a copy of the License at [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
