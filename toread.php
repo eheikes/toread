@@ -15,6 +15,7 @@
       .all-tags { margin-bottom: 0.5em; }
       .all-tags:after { content: ""; display: table; clear: both; }
       .all-tags .label { float: left; margin-bottom: 0.5em; }
+      .snapshot { margin-left: 0.25em; }
       .description { white-space: pre-line; margin: 0 0 0 1.2em; }
       .label { margin-right: 0.25em; }
       .faded { opacity: 0.5; }

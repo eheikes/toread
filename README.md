@@ -9,6 +9,7 @@ This originally began as a single PHP script, but was then rewritten in Angular 
 ## What You Can Do
 
 * Add a link for later reading
+* View a (rough) snapshot of the page
 * Add a link *with description* to save for reference
 * Add "tags" to categorize your bookmarks
 * See how many items are in your list
