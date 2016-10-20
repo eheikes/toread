@@ -201,6 +201,7 @@
         'title'       => html_entity_decode($item['title']),
         'link'        => $item['link'],
         'description' => $item['keywords'],
+        'hasSnapshot' => !is_null($item['snapshot']),
         'time'        => date('c', $item['time']),
         'created'     => $item['created'],
         'deleted'     => isset($_GET['since']) ? $item['deleted'] : !is_null($item['deleted']),
@@ -228,6 +229,7 @@
     $response = array();
 
     // Retrieve the page title.
+    $html = NULL; // default
     $title = htmlentities($url); // default
     if (function_exists("curl_init"))
     {
@@ -240,11 +242,14 @@
       $result = curl_exec($ch);
       if ($result !== false)
       {
+        // Save the <title>.
         if (preg_match("#<title[^>]*>(.*)</title>#iU", $result, $matches)
         and $matches[1] != "")
         {
           $title = $matches[1];
         }
+        // Save the page.
+        $html = $result;
       }
     }
 
@@ -253,6 +258,7 @@
          . " SET created = NOW()"
          . " , url = " . $dbh->quote($url)
          . " , title = " . $dbh->quote($title)
+         . " , snapshot = " . (is_null($html) ? "NULL" : $dbh->quote($html))
          . " , keywords = " . ($keywords == '' ? "NULL" : $dbh->quote($keywords));
     $success = $dbh->exec($sql);
     $response['success'] = (bool)$success;

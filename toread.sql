@@ -35,6 +35,7 @@ CREATE TABLE `links` (
   `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `deleted` datetime DEFAULT NULL,
   `keywords` text COLLATE utf8mb4_unicode_ci,
+  `snapshot` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
