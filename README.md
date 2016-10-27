@@ -1,6 +1,6 @@
 # ToRead
 
-ToRead is a simple bookmarking service, similar to browser bookmarks or [delicious.com](https://delicious.com).
+ToRead is a simple bookmarking service, similar to browser bookmarks, [delicious.com](https://delicious.com), or [Shaarli](https://github.com/shaarli/Shaarli).
 
 This originally began as a single PHP script, but was then rewritten in Angular with a separate PHP API backend.
 
