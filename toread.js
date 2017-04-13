@@ -175,6 +175,9 @@ module.directive('list', function($location, $window, $timeout, toreadService) {
 module.directive('controls', function() {
   return {
     restrict: 'E',
+    scope: {
+      hasSearchAccess: '=searchAccess'
+    },
     templateUrl: 'toreadcontrols.html',
     link: function(scope, element, attrs) {}
   };
