@@ -2,6 +2,8 @@
 
 ToRead is a simple bookmarking service, similar to browser bookmarks, [delicious.com](https://delicious.com), or [Shaarli](https://github.com/shaarli/Shaarli).
 
+![screenshot](https://github.com/eheikes/toread/blob/docs/screenshot.png)
+
 This originally began as a single PHP script, but was then rewritten in Angular with a separate PHP API backend.
 
 *Warning* This was created for personal use. It is not guaranteed to be robust or secure enough for a public-facing website.
