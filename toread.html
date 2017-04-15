@@ -13,7 +13,7 @@
   <p class="all-tags">
     <a href ng-repeat="tag in tags" ng-click="toggleTag(tag.id)" class="label tag-{{tag.name | dasherize}}" ng-class="{faded: tagFilter && tagFilter != tag.id}">{{tag.name}}</a>
   </p>
-  <controls search-access="true"></controls>
+  <controls></controls>
   <ul class="entries">
     <li ng-repeat="item in entries" ng-class="{highlight: item.highlighted}">
       <input type="checkbox" name="id[]" checklist-model="selectedItems" value="{{item.id}}" checklist-value="item.id" ng-disabled="actionInProgress">
