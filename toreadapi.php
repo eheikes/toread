@@ -146,7 +146,7 @@
 
   // Retrieves the links.
   function getEntry() {
-    global $dbh;
+    global $config, $dbh;
 
     $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
     $count  = isset($_GET['count'])  ? intval($_GET['count'])  : 20;
@@ -209,13 +209,17 @@
       );
     }
 
-    return array(
+    $response = array(
       'links' => $links,
       'total' => getTotal(),
       'tags'  => getCategories(),
       'stats' => getStats(),
-      'query' => $sql
     );
+    if (isset($config['debug']) and
+      $config['debug'] == 'on') {
+      $response['query'] = $sql;
+    }
+    return $response;
   }
 
   function postEntry() {
