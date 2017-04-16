@@ -45,12 +45,20 @@ module.controller('addController', function($scope, toreadService) {
   $scope.isDuplicate = false;
   $scope.isDuplicateDeleted = false;
   $scope.isSaving = false;
+  $scope.saveFailed = false;
 
   $scope.submit = function() {
     $scope.isSaving = true;
-    toreadService.add($scope.data).then(function() {
+    $scope.saveFailed = false;
+    toreadService.add($scope.data).then(function(result) {
+      if (!result.success) {
+        $scope.saveFailed = true;
+        return;
+      }
       $scope.data = {};
       $scope.$emit('refreshList');
+    }).catch(function() {
+      $scope.saveFailed = true;
     }).finally(function() {
       $scope.isSaving = false;
     });

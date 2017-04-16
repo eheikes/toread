@@ -26,7 +26,7 @@
       .search { width: 100%; }
       .search input { width: 100%; }
       #add-new-link { margin-bottom: 15px; }
-      .duplicate-warning { color: red; margin: 0.25em .5em; }
+      #add-new-link .text-danger { margin: 0.25em .5em; }
     </style>
   </head>
   <body>
@@ -43,7 +43,9 @@
               <div class="form-group">
                 <label for="new-url" title="Link URL">URL</label>
                 <input id="new-url" type="text" name="url" ng-model="data.url" ng-model-options="{debounce: 500}" value="" class="form-control" accesskey="n">
-                <div ng-show="isDuplicate" class="duplicate-warning">This link already exists<span ng-show="isDuplicateDeleted">
+                <div ng-show="isDuplicate" class="text-danger">
+                  <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+                  This link already exists<span ng-show="isDuplicateDeleted">
                   (but has been deleted)</span>.</div>
               </div>
               <div class="form-group">
@@ -55,6 +57,10 @@
                 <textarea name="keywords" ng-model="data.keywords" rows="3" cols="50" placeholder="when saving a reference" class="form-control"></textarea>
               </div>
               <input type="submit" class="btn btn-default" value="Add">
+              <div ng-show="saveFailed" class="text-danger">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                There was an error saving the link.
+              </div>
             </fieldset>
           </form>
         </div>
