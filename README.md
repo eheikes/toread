@@ -23,7 +23,7 @@ This originally began as a single PHP script, but was then rewritten in Angular 
 
 ## Installation
 
-This software requires a server running PHP and a MySQL (or compatible) database.
+This software requires a server running PHP 5.6+ and a MySQL (or compatible) database.
 
 1. Create a new database using the `toread.sql` schema.
 2. Modify the `toread.ini` file with your server+database configuration.
@@ -46,8 +46,14 @@ This software requires a server running PHP and a MySQL (or compatible) database
 * `toread.php` -- App boilerplate
 * `toread.sql` -- database schema
 * `toreadapi.php` -- API backend
+* `toreadcommon.php` -- common routines
 * `toreadcontrols.html` -- HTML partial for Angular
 * `toreadsnapshot.php` -- snapshot view for a link
+* `toreadtest.php` -- tests
+
+## Testing
+
+To run tests, you must have [atoum](http://atoum.org/) installed. Then run it against the `toreadtest.php` file: `vendor/bin/atoum toreadtest.php`.
 
 ## Legal
 
