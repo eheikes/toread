@@ -152,7 +152,10 @@
     $count  = isset($_GET['count'])  ? intval($_GET['count'])  : 20;
 
     // Query the links.
-    if (isset($_GET['finddups'])) {
+    if (isset($_GET['check'])) {
+      $sql = "SELECT * FROM links"
+           . " WHERE url=" . $dbh->quote(@$_GET['url']);
+    } else if (isset($_GET['finddups'])) {
       $sql = "SELECT *, COUNT(*) c FROM links"
            . " WHERE deleted IS NULL"
            . " AND keywords IS NULL"

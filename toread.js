@@ -13,6 +13,11 @@ module.factory('toreadService', function(toreadFactory) {
     return toreadFactory.get(opts).$promise;
   }
 
+  function check(opts) {
+    opts.check = true;
+    return toreadFactory.get(opts).$promise;
+  }
+
   function add(data) {
     return toreadFactory.save(data).$promise;
   }
@@ -23,6 +28,7 @@ module.factory('toreadService', function(toreadFactory) {
 
   return {
     get: get,
+    check: check,
     add: add,
     remove: remove
   };
@@ -36,7 +42,10 @@ module.filter('dasherize', function() {
 
 module.controller('addController', function($scope, toreadService) {
   $scope.data = {};
+  $scope.isDuplicate = false;
+  $scope.isDuplicateDeleted = false;
   $scope.isSaving = false;
+
   $scope.submit = function() {
     $scope.isSaving = true;
     toreadService.add($scope.data).then(function() {
@@ -46,6 +55,21 @@ module.controller('addController', function($scope, toreadService) {
       $scope.isSaving = false;
     });
   }
+
+  $scope.$watch(function() {
+    return $scope.data.url;
+  }, function(newData) {
+    $scope.isDuplicate = false;
+    $scope.isDuplicateDeleted = false;
+    if (!newData) { return; }
+    toreadService.check({ url: newData }).then(function(result) {
+      $scope.isDuplicate = result.links.length > 0;
+      $scope.isDuplicateDeleted = true;
+      result.links.forEach(function(link) {
+        if (!link.deleted) { $scope.isDuplicateDeleted = false; }
+      });
+    });
+  });
 });
 
 module.directive('list', function($location, $window, $timeout, toreadService) {

@@ -26,6 +26,7 @@
       .search { width: 100%; }
       .search input { width: 100%; }
       #add-new-link { margin-bottom: 15px; }
+      .duplicate-warning { color: red; margin: 0.25em .5em; }
     </style>
   </head>
   <body>
@@ -41,7 +42,9 @@
             <fieldset ng-disabled="isSaving">
               <div class="form-group">
                 <label for="new-url" title="Link URL">URL</label>
-                <input id="new-url" type="text" name="url" ng-model="data.url" value="" class="form-control" accesskey="n">
+                <input id="new-url" type="text" name="url" ng-model="data.url" ng-model-options="{debounce: 500}" value="" class="form-control" accesskey="n">
+                <div ng-show="isDuplicate" class="duplicate-warning">This link already exists<span ng-show="isDuplicateDeleted">
+                  (but has been deleted)</span>.</div>
               </div>
               <div class="form-group">
                 <label for="new-tags" title="Link tags (separate with commas)">Tags</label>
