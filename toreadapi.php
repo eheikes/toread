@@ -243,8 +243,10 @@
         {
           $title = $matches[1];
         }
-        // Save the page.
-        $html = $result;
+        // Save the page, if it's HTML.
+        if (stripos($result, '<html') !== false) {
+          $html = $result;
+        }
       }
     }
 
