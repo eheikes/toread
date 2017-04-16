@@ -257,6 +257,14 @@
          . " , keywords = " . ($keywords == '' ? "NULL" : $dbh->quote($keywords));
     $success = $dbh->exec($sql);
     $response['success'] = (bool)$success;
+    if (!$success) {
+      $errInfo = $dbh->errorInfo();
+      $errMessage = $errInfo[2];
+      if ($errInfo[0]) {
+        $errMessage .= " ({$errInfo[0]})";
+      }
+      $response['error'] = $errMessage;
+    }
 
     // Parse the tags.
     $raw_tags = isset($POST->tags) ? $POST->tags : '';
