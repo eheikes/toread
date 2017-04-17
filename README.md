@@ -51,7 +51,9 @@ This software requires a server running PHP 5.6+ and a MySQL (or compatible) dat
 * `toreadsnapshot.php` -- snapshot view for a link
 * `toreadtest.php` -- tests
 
-## Testing
+## Contributing
+
+Bug reports and contributions are welcome. [Create an issue or feature request](https://github.com/eheikes/toread/issues), or [submit a pull request](https://help.github.com/articles/creating-a-pull-request/) with your proposed changes.
 
 To run tests, you must have [atoum](http://atoum.org/) installed. Then run it against the `toreadtest.php` file: `vendor/bin/atoum toreadtest.php`.
 
