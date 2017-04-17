@@ -140,21 +140,22 @@
     $count  = isset($_GET['count'])  ? intval($_GET['count'])  : 20;
 
     // Query the links.
+    $selection = "links.*"
+      . " , UNIX_TIMESTAMP(created) AS time"
+      . " , UNIX_TIMESTAMP(created) AS created"
+      . " , UNIX_TIMESTAMP(deleted) AS deleted"
+      . " , url AS link";
     if (isset($_GET['check'])) {
-      $sql = "SELECT * FROM links"
+      $sql = "SELECT $selection FROM links"
            . " WHERE url=" . $dbh->quote(@$_GET['url']);
     } else if (isset($_GET['finddups'])) {
-      $sql = "SELECT *, COUNT(*) c FROM links"
+      $sql = "SELECT $selection, COUNT(*) c FROM links"
            . " WHERE deleted IS NULL"
            . " AND keywords IS NULL"
            . " GROUP BY url HAVING c > 1"
            . " ORDER BY created DESC";
     } else {
-      $sql = "SELECT links.*"
-        . " , UNIX_TIMESTAMP(created) AS time"
-        . " , UNIX_TIMESTAMP(created) AS created"
-        . " , UNIX_TIMESTAMP(deleted) AS deleted"
-        . " , url AS link"
+      $sql = "SELECT $selection"
         . " FROM (" . getTables() . ")"
         . " WHERE 1=1"
         . getSearchQuery(@$_GET['q'])
