@@ -234,6 +234,9 @@
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
       curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Accept-Encoding: identity" // turn off compression
+      ));
       $result = curl_exec($ch);
       if ($result !== false)
       {
