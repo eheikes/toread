@@ -217,6 +217,8 @@
   function postEntry() {
     global $dbh;
 
+    $maxTitleLength = 191;
+
     $postdata = file_get_contents("php://input");
     $POST = json_decode($postdata);
     $url = isset($POST->url) ? $POST->url : '';
@@ -245,7 +247,7 @@
         if (preg_match("#<title[^>]*>(.*)</title>#iU", $result, $matches)
         and $matches[1] != "")
         {
-          $title = $matches[1];
+          $title = mb_substr($matches[1], 0, $maxTitleLength, 'UTF-8');
         }
         // Save the page, if it's HTML.
         if (stripos($result, '<html') !== false) {
