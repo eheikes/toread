@@ -72,7 +72,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
-    <script src="http://vitalets.github.io/checklist-model/checklist-model.js"></script>
+    <script src="https://vitalets.github.io/checklist-model/checklist-model.js"></script>
     <script src="toread.js"></script>
   </body>
 </html>
