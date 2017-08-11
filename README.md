@@ -1,3 +1,4 @@
+
 # ToRead
 
 ToRead is a simple bookmarking service, similar to browser bookmarks, [delicious.com](https://delicious.com), or [Shaarli](https://github.com/shaarli/Shaarli).
@@ -23,7 +24,7 @@ This originally began as a single PHP script, but was then rewritten in Angular 
 
 ## Installation
 
-This software requires a server running PHP 5.6+ and a MySQL (or compatible) database.
+This software requires a server running PHP 5.6+ (with the [mbstring](http://php.net/mbstring) extension) and a MySQL (or compatible) database.
 
 1. Create a new database using the `toread.sql` schema.
 2. Modify the `toread.ini` file with your server+database configuration.
