@@ -243,6 +243,14 @@
       $result = curl_exec($ch);
       if ($result !== false)
       {
+        // Look for a charset definition in the page.
+        // Convert to UTF-8 if necessary.
+        if (preg_match("#<meta[^<]*charset=([a-z0-9_-]+)#is", $result, $matches)) {
+          if (strtolower($matches[1]) !== 'utf-8') {
+            $result = mb_convert_encoding($result, 'UTF-8', $matches[1]);
+          }
+        }
+
         // Save the <title>.
         if (preg_match("#<title[^>]*>(.*)</title>#iU", $result, $matches)
         and $matches[1] != "")
