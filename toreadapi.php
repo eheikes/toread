@@ -187,10 +187,15 @@
         $tags[] = $tagInfo['name'];
       }
 
+      $decodedTitle = html_entity_decode($item['title']);
+      $decodedTitle = preg_replace_callback("/&#[0-9]+;/", function($m) {
+        return mb_convert_encoding($m[0], 'UTF-8', 'HTML-ENTITIES');
+      }, $decodedTitle);
+
       // Add the link info to the array.
       $links[] = array(
         'id'          => intval($item['id']),
-        'title'       => html_entity_decode($item['title']),
+        'title'       => $decodedTitle,
         'link'        => $item['link'],
         'description' => $item['keywords'],
         'hasSnapshot' => !is_null($item['snapshot']),
