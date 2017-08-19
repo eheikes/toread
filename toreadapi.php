@@ -188,7 +188,7 @@
       }
 
       $decodedTitle = html_entity_decode($item['title']);
-      $decodedTitle = preg_replace_callback("/&#[0-9]+;/", function($m) {
+      $decodedTitle = preg_replace_callback("/&#(x?)[0-9]+;/", function($m) {
         return mb_convert_encoding($m[0], 'UTF-8', 'HTML-ENTITIES');
       }, $decodedTitle);
 
