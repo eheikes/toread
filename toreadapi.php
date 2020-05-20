@@ -259,7 +259,8 @@
         // Save the <title>.
         $cleanedHtml = preg_replace('#<script.*</script>#isU', '', $result);
         $cleanedHtml = preg_replace('#<style.*</style>#isU', '', $cleanedHtml);
-        if (preg_match("#<title[^>]*>(.*)</title>#iU", $cleanedHtml, $matches)
+        $cleanedHtml = preg_replace('#<svg.*</svg>#isU', '', $cleanedHtml);
+        if (preg_match("#<title[^>]*>(.*)</title>#isU", $cleanedHtml, $matches)
         and $matches[1] != "")
         {
           $title = mb_substr($matches[1], 0, $maxTitleLength, 'UTF-8');
