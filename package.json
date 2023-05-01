@@ -1,0 +1,30 @@
+{
+  "name": "toread",
+  "version": "2.0.0",
+  "private": true,
+  "description": "To Read app",
+  "main": "server.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eheikes/toread.git"
+  },
+  "author": "Eric Heikes <eheikes@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/eheikes/toread/issues"
+  },
+  "homepage": "https://github.com/eheikes/toread#readme",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "html-entities": "^2.3.3",
+    "knex": "^2.4.2",
+    "mysql2": "^3.2.3",
+    "node-fetch": "^3.3.1"
+  }
+}
