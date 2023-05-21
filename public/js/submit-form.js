@@ -90,6 +90,9 @@ export class ToreadSubmitForm extends LitElement {
     const duplicateErrorStyles = {
       display: this.isDuplicate ? 'block' : 'none'
     }
+    const duplicateDeletedErrorStyles = {
+      display: this.isDuplicateDeleted ? 'inline' : 'none'
+    }
     const saveErrorStyles = {
       display: this.saveFailed ? 'block' : 'none'
     }
@@ -101,7 +104,7 @@ export class ToreadSubmitForm extends LitElement {
             <label for="new-url" title="Link URL">URL</label>
             <input id="new-url" type="text" name="url" value="" accesskey="n" @keyup=${this.checkUrl}>
             <div class="error" style=${styleMap(duplicateErrorStyles)}>
-              ⚠️ This link already exists<span ng-show="isDuplicateDeleted"> (but has been deleted)</span>.
+              ⚠️ This link already exists<span style=${styleMap(duplicateDeletedErrorStyles)}> (but has been deleted)</span>.
             </div>
           </div>
           <div>
