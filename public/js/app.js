@@ -115,11 +115,7 @@ export class ToreadApp extends LitElement {
     if (this.offset < 0 || this.offset >= this.stats.total) {
       this.offset = 0
     }
-    this.selectedItems = []
-    const inputEls = this.shadowRoot.querySelectorAll('input[type="checkbox"]')
-    for (const el of inputEls) {
-      el.checked = false
-    }
+    this.clearSelected()
     this.showList()
   }
 
@@ -146,10 +142,18 @@ export class ToreadApp extends LitElement {
     this.showList()
   }
 
+  clearSelected() {
+    this.selectedItems = []
+    const inputEls = this.shadowRoot.querySelectorAll('input[type="checkbox"]')
+    for (const el of inputEls) {
+      el.checked = false
+    }
+  }
+
   deleteSelected(_event) {
     this.actionInProgress = true
     this.api.remove(this.selectedItems).then(() => {
-      this.selectedItems = []
+      this.clearSelected()
       this.showList()
     }).finally(() => {
       this.actionInProgress = false
