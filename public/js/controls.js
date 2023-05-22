@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
+import { LitElement, css, html, styleMap } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
 import { debounce } from './util.js'
 
 export class ToreadControls extends LitElement {
@@ -6,12 +6,13 @@ export class ToreadControls extends LitElement {
     disabled: { type: Boolean },
     'any-selected': { type: Boolean },
     'no-previous': { type: Boolean },
-    'no-next': { type: Boolean }
+    'no-next': { type: Boolean },
+    q: { type: String, state: true } // internal state of the search terms
   }
 
   static styles = css`
     .controls > div { margin-bottom: 15px; }
-    .search { width: 100%; }
+    .search { width: 90%; }
     .search input { width: 100%; }
   `
 
@@ -21,6 +22,7 @@ export class ToreadControls extends LitElement {
     this['any-selected'] = false
     this['no-previous'] = false
     this['no-next'] = false
+    this.q = ''
   }
 
   changePage(event, offset) {
@@ -35,6 +37,7 @@ export class ToreadControls extends LitElement {
 
   clearSearch(event) {
     event.preventDefault()
+    this.q = ''
     const input = this.shadowRoot.querySelector('input[name="q"]')
     input.value = ''
     input.focus()
@@ -57,15 +60,22 @@ export class ToreadControls extends LitElement {
   search(event) {
     event.preventDefault()
     const input = this.shadowRoot.querySelector('input[name="q"]')
+    this.q = input.value
     const searchEvent = new CustomEvent('search', {
       bubbles: true,
       composed: true,
-      detail: { phrase: input.value }
+      detail: { phrase: this.q }
     })
     this.dispatchEvent(searchEvent)
   }
 
   render() {
+    const clearButtonStyles = {
+      display: this.q !== '' ? 'inline' : 'none'
+    }
+    const searchIconStyles = {
+      display: this.q === '' ? 'inline' : 'none'
+    }
     return html`
       <div class="controls row form-inline">
         <div class="col-md-6">
@@ -75,10 +85,10 @@ export class ToreadControls extends LitElement {
         </div>
         <div class="col-md-6">
           <div class="search input-group has-feedback">
-            <input class="form-control" ng-class="{'alert-info': q != ''}" name="q" type="text" value="" placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
-            <span class="glyphicon glyphicon-search form-control-feedback" ng-class="{hidden: q != ''}" aria-hidden="true">🔎</span>
+            <input class="form-control" name="q" type="text" value="" placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
+            <span class="glyphicon glyphicon-search form-control-feedback" style=${styleMap(searchIconStyles)} aria-hidden="true">🔎</span>
             <span class="input-group-btn">
-              <button class="btn btn-default" ng-class="{hidden: q == ''}" type="button" aria-label="Clear search" @click=${this.clearSearch}>
+              <button class="btn btn-default" style=${styleMap(clearButtonStyles)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙
               </button>
             </span>
