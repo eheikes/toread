@@ -14,6 +14,14 @@ export class ToreadControls extends LitElement {
     .controls > div { margin-bottom: 15px; }
     .search { width: 90%; }
     .search input { width: 100%; }
+    .search input:placeholder-shown {
+      background-image: url("images/search.svg");
+      background-position: top .1em right .1em;
+      background-size: 2em 2em;
+      background-repeat: no-repeat;
+    }
+    .search input:not(:placeholder-shown) { width: 85%; }
+    .search button { font-size: .85em; }
   `
 
   constructor() {
@@ -77,24 +85,24 @@ export class ToreadControls extends LitElement {
       display: this.q === '' ? 'inline' : 'none'
     }
     return html`
-      <div class="controls row form-inline">
-        <div class="col-md-6">
-          <input class="btn btn-default" type="button" value="← Previous" @click=${{handleEvent: (event) => this.changePage(event, -1)}} ?disabled=${this.disabled || this['no-previous']}>
-          <input class="btn btn-default" type="button" value="Next →" @click=${{handleEvent: (event) => this.changePage(event, 1)}} ?disabled=${this.disabled || this['no-next']}>
-          <input class="btn btn-default" type="button" value="Delete selected" @click=${this.deleteSelected} ?disabled=${this.disabled || !this['any-selected']}>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+      <form class="controls pure-form pure-g">
+        <div class="pure-u-1-2">
+          <input class="pure-button" type="button" value="← Previous" @click=${{handleEvent: (event) => this.changePage(event, -1)}} ?disabled=${this.disabled || this['no-previous']}>
+          <input class="pure-button" type="button" value="Next →" @click=${{handleEvent: (event) => this.changePage(event, 1)}} ?disabled=${this.disabled || this['no-next']}>
+          <input class="pure-button" type="button" value="Delete selected" @click=${this.deleteSelected} ?disabled=${this.disabled || !this['any-selected']}>
         </div>
-        <div class="col-md-6">
-          <div class="search input-group has-feedback">
+        <div class="pure-u-1-2">
+          <div class="search pure-button-group" role="group" aria-label="Search">
             <input class="form-control" name="q" type="text" value="" placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
-            <span class="glyphicon glyphicon-search form-control-feedback" style=${styleMap(searchIconStyles)} aria-hidden="true">🔎</span>
             <span class="input-group-btn">
-              <button class="btn btn-default" style=${styleMap(clearButtonStyles)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
+              <button class="pure-button" style=${styleMap(clearButtonStyles)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙
               </button>
             </span>
           </div>
         </div>
-      </div>
+      </form>
     `
   }
 }

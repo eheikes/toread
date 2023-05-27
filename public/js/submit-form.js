@@ -16,6 +16,8 @@ export class ToreadSubmitForm extends LitElement {
 
   static styles = css`
     form { margin-bottom: 15px; }
+    h2 { margin-top: 1.5em; margin-bottom: 0; }
+    fieldset { padding: 0; border: 0; }
     label { margin-right: 0.25em; }
     .error { color: red; }
   `
@@ -97,7 +99,8 @@ export class ToreadSubmitForm extends LitElement {
       display: this.saveFailed ? 'block' : 'none'
     }
     return html`
-      <form @submit=${this.submit}>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+      <form @submit=${this.submit} class="pure-form pure-form-stacked">
         <h2>Add New Link</h2>
         <fieldset ?disabled=${this.isSaving}>
           <div>
@@ -113,9 +116,9 @@ export class ToreadSubmitForm extends LitElement {
           </div>
           <div>
             <label for="new-description">Description</label>
-            <textarea id="new-description" name="keywords" rows="3" cols="50" placeholder="when saving a reference"></textarea>
+            <textarea id="new-description" name="keywords" rows="5" cols="50" placeholder="when saving a reference"></textarea>
           </div>
-          <input type="submit" value="Add">
+          <input type="submit" class="pure-button pure-button-primary" value="Add">
           <div class="error" style=${styleMap(saveErrorStyles)}>
             ⚠️ There was an error saving the link.
           </div>

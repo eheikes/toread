@@ -10,6 +10,7 @@ export class ToreadTags extends LitElement {
     p { margin-bottom: 0.5em; }
     p:after { content: ""; display: table; clear: both; }
     p a { float: left; margin-bottom: 0.5em; }
+    a { text-decoration: none; }
     .faded { opacity: 0.5; }
   `
 

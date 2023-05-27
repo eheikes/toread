@@ -70,6 +70,11 @@ export class ToreadApp extends LitElement {
 
   // Define scoped styles right with your component, in plain CSS
   static styles = css`
+    h1 { margin-bottom: 0; }
+    p { margin-top: .25em; }
+    a { text-decoration: none; color: #337ab7; background: transparent; }
+    a:hover, a:active { text-decoration: underline; }
+    .pure-g { margin: auto; width: 75%; }
     ul.entries { margin-left: 0; padding-left: 0; }
     ul.entries li { list-style: none; padding: 0.15em 0.25em; }
     .description { white-space: pre-line; margin: 0 0 0 1.2em; }
@@ -226,8 +231,9 @@ export class ToreadApp extends LitElement {
 
   render() {
     return html`
-      <div class="grid grid-cols-9 gap-4 max-w-6xl mx-auto my-6">
-        <div class="col-span-6">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+      <div class="pure-g">
+        <div class="pure-u-2-3">
           <h1 class="text-4xl"><a href="?">To Read</a></h1>
           <div>
             <p>
@@ -278,7 +284,7 @@ export class ToreadApp extends LitElement {
             ></toread-controls>
           </div>
         </div>
-        <div class="col-span-3">
+        <div class="pure-u-1-3">
           <toread-submit-form api-url=${this['api-url']}></toread-submit-form>
         </div>
       </div>
