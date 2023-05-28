@@ -14,7 +14,7 @@ export class ToreadTags extends LitElement {
     .faded { opacity: 0.5; }
   `
 
-  toggleTag(event, tagId) {
+  toggleTag (event, tagId) {
     event.preventDefault()
     const toggleEvent = new CustomEvent('toggleTag', {
       bubbles: true,
@@ -24,13 +24,13 @@ export class ToreadTags extends LitElement {
     this.dispatchEvent(toggleEvent)
   }
 
-  render() {
+  render () {
     return html`
       <p>
         ${this.tags.map(tag => {
           const classes = { faded: this.filter && this.filter !== tag.id }
           return html`<a href
-            @click=${{handleEvent: (event) => this.toggleTag(event, tag.id)}}
+            @click=${{ handleEvent: (event) => this.toggleTag(event, tag.id) }}
             class=${classMap(classes)}
           ><toread-tag color=${tag.color} text-color=${tag.contrastColor}>${tag.name}</toread-tag></a>`
         })}

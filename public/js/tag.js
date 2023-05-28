@@ -21,7 +21,7 @@ export class ToreadTag extends LitElement {
     }
   `
 
-  render() {
+  render () {
     return html`
       <span style="background-color: ${this.color}; color: ${this['text-color']};">
         <slot></slot>

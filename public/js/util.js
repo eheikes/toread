@@ -1,4 +1,4 @@
-export function debounce(func, timeout = 300) {
+export function debounce (func, timeout = 300) {
   console.log('** debounce', timeout)
   let timer
   return (...args) => {

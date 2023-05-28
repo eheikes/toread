@@ -1,10 +1,9 @@
 import { LitElement, css, html, styleMap } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
 import { createApi } from './api.js'
-import { debounce } from './util.js'
 
 export class ToreadSubmitForm extends LitElement {
   static properties = {
-    ['api-url']: { // note: do not change this; it is read-only
+    'api-url': { // note: do not change this; it is read-only
       type: String,
       attribute: true
     },
@@ -22,7 +21,7 @@ export class ToreadSubmitForm extends LitElement {
     .error { color: red; }
   `
 
-  constructor() {
+  constructor () {
     super()
     this.isDuplicate = false
     this.isDuplicateDeleted = false
@@ -33,7 +32,7 @@ export class ToreadSubmitForm extends LitElement {
     this.api = createApi(this['api-url'])
   }
 
-  checkUrl(event) {
+  checkUrl (event) {
     event.preventDefault()
     this.isDuplicate = false
     this.isDuplicateDeleted = false
@@ -48,7 +47,7 @@ export class ToreadSubmitForm extends LitElement {
     })
   }
 
-  clearForm() {
+  clearForm () {
     const form = this.shadowRoot.querySelector('form')
     const fields = [...form.querySelectorAll('input[type="text"]'), ...form.querySelectorAll('textarea')]
     for (const field of fields) {
@@ -60,7 +59,7 @@ export class ToreadSubmitForm extends LitElement {
     this.saveFailed = false
   }
 
-  submit(event) {
+  submit (event) {
     event.preventDefault()
     this.isSaving = true
     this.saveFailed = false
@@ -88,7 +87,7 @@ export class ToreadSubmitForm extends LitElement {
     })
   }
 
-  render() {
+  render () {
     const duplicateErrorStyles = {
       display: this.isDuplicate ? 'block' : 'none'
     }

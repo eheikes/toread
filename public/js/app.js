@@ -1,15 +1,17 @@
 import { LitElement, css, html, classMap, nothing } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
 import { createApi } from './api.js'
 // TODO add these as exports that import them elsewhere
+/* eslint-disable no-unused-vars */
 import { ToreadControls } from './controls.js' // needed to register the element
 import { ToreadStats } from './stats.js' // needed to register the element
 import { ToreadSubmitForm } from './submit-form.js' // needed to register the element
 import { ToreadTag } from './tag.js' // needed to register the element
 import { ToreadTags } from './tags.js' // needed to register the element
+/* eslint-enable no-unused-vars */
 
 // Returns the current value from the URL parameters,
 //   or the default value if not set yet.
-function getParamOrDefault(name, defaultVal, convertToInt) {
+function getParamOrDefault (name, defaultVal, convertToInt) {
   const params = new URL(window.location).searchParams
   if (params.get(name) === null) {
     return defaultVal
@@ -20,7 +22,7 @@ function getParamOrDefault(name, defaultVal, convertToInt) {
   return params.get(name)
 }
 
-function random(lo, hi) {
+function random (lo, hi) {
   return Math.floor(Math.random() * (hi - lo + 1)) + lo
 }
 
@@ -30,7 +32,7 @@ export class ToreadApp extends LitElement {
       type: Boolean,
       state: true
     },
-    ['api-url']: { // note: do not change this; it is read-only
+    'api-url': { // note: do not change this; it is read-only
       type: String,
       attribute: true
     },
@@ -83,7 +85,7 @@ export class ToreadApp extends LitElement {
     .strike { text-decoration: line-through; }
   `
 
-  constructor() {
+  constructor () {
     super()
 
     this.actionInProgress = false
@@ -115,7 +117,7 @@ export class ToreadApp extends LitElement {
     })
   }
 
-  changePage(event) {
+  changePage (event) {
     this.offset = this.offset + (this.limit * event.detail.offset)
     if (this.offset < 0 || this.offset >= this.stats.total) {
       this.offset = 0
@@ -124,11 +126,11 @@ export class ToreadApp extends LitElement {
     this.showList()
   }
 
-  chooseRandom(event) {
+  chooseRandom (event) {
     event.preventDefault()
     const chosenIndex = random(0, this.stats.total - 1)
     const remainder = chosenIndex % this.limit
-    console.log('Choosing random...',)
+    console.log('Choosing random...')
     console.log('stats:', this.stats)
     console.log('chosenIndex:', chosenIndex)
     console.log('remainder:', remainder)
@@ -139,15 +141,15 @@ export class ToreadApp extends LitElement {
       this.highlighted = remainder
       this.pushState()
       this.highlightOffset(remainder)
-    });
+    })
   }
 
-  clearSearch(_event) {
+  clearSearch (_event) {
     this.q = ''
     this.showList()
   }
 
-  clearSelected() {
+  clearSelected () {
     this.selectedItems = []
     const inputEls = this.shadowRoot.querySelectorAll('input[type="checkbox"]')
     for (const el of inputEls) {
@@ -155,7 +157,7 @@ export class ToreadApp extends LitElement {
     }
   }
 
-  deleteSelected(_event) {
+  deleteSelected (_event) {
     this.actionInProgress = true
     this.api.remove(this.selectedItems).then(() => {
       this.clearSelected()
@@ -167,7 +169,7 @@ export class ToreadApp extends LitElement {
 
   // Highlight the nth item in the list (starting at 0)
   //   and scroll the screen to its position.
-  highlightOffset(n) {
+  highlightOffset (n) {
     this.links = this.links.map((link, i) => ({
       ...link,
       highlighted: n === i
@@ -176,7 +178,7 @@ export class ToreadApp extends LitElement {
     entries[n].scrollIntoView({ behavior: 'smooth' })
   }
 
-  pushState = function() {
+  pushState = function () {
     const url = new URL(window.location)
     if (this.highlighted !== null) {
       url.searchParams.set('highlighted', this.highlighted)
@@ -190,16 +192,15 @@ export class ToreadApp extends LitElement {
     url.searchParams.set('offset', this.offset)
     url.searchParams.set('q', this.q)
     history.pushState({}, '', url.toString())
-  };
+  }
 
-
-  search(event) {
+  search (event) {
     this.q = event?.detail?.phrase ?? ''
     this.offset = 0
     this.showList()
   }
 
-  showList() {
+  showList () {
     return this.api.get({
       q: this.q ?? '',
       tag: this.tagFilter ?? '',
@@ -216,20 +217,20 @@ export class ToreadApp extends LitElement {
     })
   }
 
-  toggleTag(event) {
+  toggleTag (event) {
     this.tagFilter = this.tagFilter === event.detail.tagId ? null : event.detail.tagId
     this.offset = 0
     this.showList()
   }
 
-  updatedSelected(_event) {
+  updatedSelected (_event) {
     this.selectedItems = [...this.shadowRoot.querySelectorAll('input[type="checkbox"]')].map(inputEl => {
       if (inputEl.checked) { return inputEl.value }
       return null
     }).filter(val => val !== null)
   }
 
-  render() {
+  render () {
     return html`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <div class="pure-g">

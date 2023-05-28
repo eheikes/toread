@@ -1,6 +1,6 @@
-export function createApi(baseUrl) {
+export function createApi (baseUrl) {
   return {
-    get: function(params) {
+    get: function (params) {
       console.log('*** get()', params)
       const searchParams = new URLSearchParams(params)
       const url = `${baseUrl}/links?${searchParams}`
@@ -12,7 +12,7 @@ export function createApi(baseUrl) {
       })
     },
 
-    check: function(params) {
+    check: function (params) {
       console.log('*** check()', params)
       const searchParams = new URLSearchParams(params)
       searchParams.set('check', 'true')
@@ -25,7 +25,7 @@ export function createApi(baseUrl) {
       })
     },
 
-    add: function(data) {
+    add: function (data) {
       console.log('*** add()', data)
       const url = `${baseUrl}/links`
       return fetch(url, {
@@ -40,7 +40,7 @@ export function createApi(baseUrl) {
       })
     },
 
-    remove: function(idsArray) {
+    remove: function (idsArray) {
       console.log('*** remove()', idsArray)
       return Promise.all(
         idsArray.map(id => {
@@ -49,7 +49,7 @@ export function createApi(baseUrl) {
       ).then(responses => {
         return responses.map(response => {
           if (!response.ok) {
-            throw new Error(`Could not remove link ID #${id} from server (type ${response.type}, status ${response.status})`)
+            throw new Error(`Could not remove link from server (type ${response.type}, status ${response.status})`)
           }
           return response.json()
         })

@@ -13,7 +13,7 @@ export class ToreadStats extends LitElement {
     del { color: green; text-decoration: none; }
   `
 
-  render() {
+  render () {
     return html`
       <span class="stats">
         <ins>+${this['added-today']}</ins>/<del>-${this['deleted-today']}</del> today,

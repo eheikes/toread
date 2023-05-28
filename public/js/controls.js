@@ -1,5 +1,4 @@
 import { LitElement, css, html, styleMap } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
-import { debounce } from './util.js'
 
 export class ToreadControls extends LitElement {
   static properties = {
@@ -24,7 +23,7 @@ export class ToreadControls extends LitElement {
     .search button { font-size: .85em; }
   `
 
-  constructor() {
+  constructor () {
     super()
     this.disabled = false
     this['any-selected'] = false
@@ -33,7 +32,7 @@ export class ToreadControls extends LitElement {
     this.q = ''
   }
 
-  changePage(event, offset) {
+  changePage (event, offset) {
     event.preventDefault()
     const changeEvent = new CustomEvent('changePage', {
       bubbles: true,
@@ -43,7 +42,7 @@ export class ToreadControls extends LitElement {
     this.dispatchEvent(changeEvent)
   }
 
-  clearSearch(event) {
+  clearSearch (event) {
     event.preventDefault()
     this.q = ''
     const input = this.shadowRoot.querySelector('input[name="q"]')
@@ -56,7 +55,7 @@ export class ToreadControls extends LitElement {
     this.dispatchEvent(clearEvent)
   }
 
-  deleteSelected(event) {
+  deleteSelected (event) {
     event.preventDefault()
     const deleteEvent = new CustomEvent('deleteSelected', {
       bubbles: true,
@@ -65,7 +64,7 @@ export class ToreadControls extends LitElement {
     this.dispatchEvent(deleteEvent)
   }
 
-  search(event) {
+  search (event) {
     event.preventDefault()
     const input = this.shadowRoot.querySelector('input[name="q"]')
     this.q = input.value
@@ -77,19 +76,16 @@ export class ToreadControls extends LitElement {
     this.dispatchEvent(searchEvent)
   }
 
-  render() {
+  render () {
     const clearButtonStyles = {
       display: this.q !== '' ? 'inline' : 'none'
-    }
-    const searchIconStyles = {
-      display: this.q === '' ? 'inline' : 'none'
     }
     return html`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <form class="controls pure-form pure-g">
         <div class="pure-u-1-2">
-          <input class="pure-button" type="button" value="← Previous" @click=${{handleEvent: (event) => this.changePage(event, -1)}} ?disabled=${this.disabled || this['no-previous']}>
-          <input class="pure-button" type="button" value="Next →" @click=${{handleEvent: (event) => this.changePage(event, 1)}} ?disabled=${this.disabled || this['no-next']}>
+          <input class="pure-button" type="button" value="← Previous" @click=${{ handleEvent: (event) => this.changePage(event, -1) }} ?disabled=${this.disabled || this['no-previous']}>
+          <input class="pure-button" type="button" value="Next →" @click=${{ handleEvent: (event) => this.changePage(event, 1) }} ?disabled=${this.disabled || this['no-next']}>
           <input class="pure-button" type="button" value="Delete selected" @click=${this.deleteSelected} ?disabled=${this.disabled || !this['any-selected']}>
         </div>
         <div class="pure-u-1-2">
