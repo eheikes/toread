@@ -19,8 +19,10 @@
     "build": "true",
     "build:watch": "true",
     "dev": "run-p build:watch serve:ui",
+    "lint": "true",
     "serve:ui": "http-server public",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "true"
   },
   "dependencies": {
     "boolean": "^3.2.0",
