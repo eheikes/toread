@@ -264,7 +264,7 @@ export class ToreadApp extends LitElement {
                   <li class=${classMap(listClasses)}>
                     <input type="checkbox" name="id" value="${item.id}" ?disabled=${this.actionInProgress} @change=${this.updatedSelected}>
                     <a href=${item.link} class=${classMap(linkClasses)} target="_blank">${item.title}</a>
-                    ${item.hasSnapshot ? html`<a href="toreadsnapshot.php?id=${item.id}" class="snapshot" target="_blank" title="View snapshot">🕶️</a>` : nothing}
+                    ${item.hasSnapshot ? html`<a href="snapshot?id=${item.id}" class="snapshot" target="_blank" title="View snapshot">🕶️</a>` : nothing}
                     <span class="date">${date}</span>
                     <span class="tags">
                       ${item.tags.map((tag) => html`
