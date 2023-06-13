@@ -9,7 +9,7 @@ export default {
     // Minify JS
     terser({
       module: true,
-      warnings: true,
+      warnings: true
     })
   ],
   output: [{
@@ -17,5 +17,4 @@ export default {
     file: 'public/js/app.js'
   }],
   preserveEntrySignatures: false
-};
-
+}
