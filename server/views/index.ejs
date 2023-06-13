@@ -7,6 +7,14 @@
     <title>To-Read List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <script type="module" src="js/app.js"></script>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        html, body {
+          background-color: #000;
+          color: #ccc;
+        }
+      }
+    </style>
   </head>
   <body>
     <toread-app api-url="<%= apiUrl %>"></toread-app>

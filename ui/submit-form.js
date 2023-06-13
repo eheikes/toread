@@ -20,6 +20,18 @@ export class ToreadSubmitForm extends LitElement {
     fieldset { padding: 0; border: 0; }
     label { margin-right: 0.25em; }
     .error { color: red; }
+    @media (prefers-color-scheme: dark) {
+      .pure-form input[type="text"],
+      .pure-form textarea {
+        background-color: #333;
+        color: #ccc;
+        border: #444;
+        box-shadow: none;
+      }
+      .pure-button-primary {
+        background-color: #00386bfa;
+      }
+    }
   `
 
   constructor () {

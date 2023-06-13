@@ -22,6 +22,27 @@ export class ToreadControls extends LitElement {
     }
     .search input:not(:placeholder-shown) { width: 85%; }
     .search button { font-size: .85em; }
+    @media (prefers-color-scheme: dark) {
+      .search input[type="button"] {
+        background-color: #999;
+        color: #333;
+      }
+      .pure-button[disabled] {
+        background-color: #666;
+        color: #fff;
+      }
+      .search input[type="text"] {
+        background-color: #333;
+        color: #ccc;
+        border: #444;
+        box-shadow: none;
+      }
+      .search button {
+        background-color: #666;
+        color: #ccc;
+      }
+    }
+
   `
 
   constructor () {
