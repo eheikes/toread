@@ -36,7 +36,7 @@ const it=1,nt=t=>(...e)=>({_$litDirective$:t,values:e});let ot=class{constructor
  * @license
  * Copyright 2018 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const at="important",ht=" !"+at,dt=nt(class extends ot{constructor(t){var e;if(super(t),t.type!==it||"style"!==t.name||(null===(e=t.strings)||void 0===e?void 0:e.length)>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(t){return Object.keys(t).reduce(((e,s)=>{const i=t[s];return null==i?e:e+`${s=s.includes("-")?s:s.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${i};`}),"")}update(t,[e]){const{style:s}=t.element;if(void 0===this.ut){this.ut=new Set;for(const t in e)this.ut.add(t);return this.render(e)}this.ut.forEach((t=>{null==e[t]&&(this.ut.delete(t),t.includes("-")?s.removeProperty(t):s[t]="")}));for(const t in e){const i=e[t];if(null!=i){this.ut.add(t);const e="string"==typeof i&&i.endsWith(ht);t.includes("-")||e?s.setProperty(t,e?i.slice(0,-11):i,e?at:""):s[t]=i}}return O}});class ct extends et{static properties={disabled:{type:Boolean},"any-selected":{type:Boolean},"no-previous":{type:Boolean},"no-next":{type:Boolean},q:{type:String,state:!0}};static styles=o`
+ */const at="important",ht=" !"+at,dt=nt(class extends ot{constructor(t){var e;if(super(t),t.type!==it||"style"!==t.name||(null===(e=t.strings)||void 0===e?void 0:e.length)>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(t){return Object.keys(t).reduce(((e,s)=>{const i=t[s];return null==i?e:e+`${s=s.includes("-")?s:s.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${i};`}),"")}update(t,[e]){const{style:s}=t.element;if(void 0===this.ut){this.ut=new Set;for(const t in e)this.ut.add(t);return this.render(e)}this.ut.forEach((t=>{null==e[t]&&(this.ut.delete(t),t.includes("-")?s.removeProperty(t):s[t]="")}));for(const t in e){const i=e[t];if(null!=i){this.ut.add(t);const e="string"==typeof i&&i.endsWith(ht);t.includes("-")||e?s.setProperty(t,e?i.slice(0,-11):i,e?at:""):s[t]=i}}return O}});class ct extends et{static properties={disabled:{type:Boolean},"any-selected":{type:Boolean},"no-previous":{type:Boolean},"no-next":{type:Boolean},q:{type:String}};static styles=o`
     .controls > div { margin-bottom: 15px; }
     .search { width: 90%; }
     .search input { width: 100%; }
@@ -48,7 +48,7 @@ const it=1,nt=t=>(...e)=>({_$litDirective$:t,values:e});let ot=class{constructor
     }
     .search input:not(:placeholder-shown) { width: 85%; }
     .search button { font-size: .85em; }
-  `;constructor(){super(),this.disabled=!1,this["any-selected"]=!1,this["no-previous"]=!1,this["no-next"]=!1,this.q=""}changePage(t,e){t.preventDefault();const s=new CustomEvent("changePage",{bubbles:!0,composed:!0,detail:{offset:e}});this.dispatchEvent(s)}clearSearch(t){t.preventDefault(),this.q="";const e=this.shadowRoot.querySelector('input[name="q"]');e.value="",e.focus();const s=new CustomEvent("clearSearch",{bubbles:!0,composed:!0});this.dispatchEvent(s)}deleteSelected(t){t.preventDefault();const e=new CustomEvent("deleteSelected",{bubbles:!0,composed:!0});this.dispatchEvent(e)}search(t){t.preventDefault();const e=this.shadowRoot.querySelector('input[name="q"]');this.q=e.value;const s=new CustomEvent("search",{bubbles:!0,composed:!0,detail:{phrase:this.q}});this.dispatchEvent(s)}render(){const t={display:""!==this.q?"inline":"none"};return R`
+  `;constructor(){super(),this.disabled=!1,this["any-selected"]=!1,this["no-previous"]=!1,this["no-next"]=!1,this.q=null}changePage(t,e){t.preventDefault();const s=new CustomEvent("changePage",{bubbles:!0,composed:!0,detail:{offset:e}});this.dispatchEvent(s)}clearSearch(t){t.preventDefault(),this.q="";const e=this.shadowRoot.querySelector('input[name="q"]');e.value="",e.focus();const s=new CustomEvent("clearSearch",{bubbles:!0,composed:!0});this.dispatchEvent(s)}deleteSelected(t){t.preventDefault();const e=new CustomEvent("deleteSelected",{bubbles:!0,composed:!0});this.dispatchEvent(e)}search(t){t.preventDefault();const e=this.shadowRoot.querySelector('input[name="q"]');this.q=e.value;const s=new CustomEvent("search",{bubbles:!0,composed:!0,detail:{phrase:this.q}});this.dispatchEvent(s)}render(){const t={display:""!==this.q?"inline":"none"};return R`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <form class="controls pure-form pure-g">
         <div class="pure-u-1-2">
@@ -58,7 +58,7 @@ const it=1,nt=t=>(...e)=>({_$litDirective$:t,values:e});let ot=class{constructor
         </div>
         <div class="pure-u-1-2">
           <div class="search pure-button-group" role="group" aria-label="Search">
-            <input class="form-control" name="q" type="text" value="" placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
+            <input class="form-control" name="q" type="text" value=${this.q} placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
             <span class="input-group-btn">
               <button class="pure-button" style=${dt(t)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙
@@ -171,6 +171,7 @@ const it=1,nt=t=>(...e)=>({_$litDirective$:t,values:e});let ot=class{constructor
               ?any-selected=${0!==this.selectedItems.length}
               ?no-previous=${0===this.offset}
               ?no-next=${this.offset+this.limit>=this.stats.total}
+              q=${this.q}
             ></toread-controls>
             <ul class="entries">
               ${this.links.map((t=>{const e=new Date(t.time),s=new Intl.DateTimeFormat("en-US",{dateStyle:"short"}).format(e),i={highlight:t.highlighted},n={strike:t.deleted};return R`
@@ -193,6 +194,7 @@ const it=1,nt=t=>(...e)=>({_$litDirective$:t,values:e});let ot=class{constructor
               ?any-selected=${0!==this.selectedItems.length}
               ?no-previous=${0===this.offset}
               ?no-next=${this.offset+this.limit>=this.stats.total}
+              q=${this.q}
             ></toread-controls>
           </div>
         </div>

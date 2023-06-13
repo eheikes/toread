@@ -7,7 +7,7 @@ export class ToreadControls extends LitElement {
     'any-selected': { type: Boolean },
     'no-previous': { type: Boolean },
     'no-next': { type: Boolean },
-    q: { type: String, state: true } // internal state of the search terms
+    q: { type: String }
   }
 
   static styles = css`
@@ -30,7 +30,7 @@ export class ToreadControls extends LitElement {
     this['any-selected'] = false
     this['no-previous'] = false
     this['no-next'] = false
-    this.q = ''
+    this.q = null
   }
 
   changePage (event, offset) {
@@ -91,7 +91,7 @@ export class ToreadControls extends LitElement {
         </div>
         <div class="pure-u-1-2">
           <div class="search pure-button-group" role="group" aria-label="Search">
-            <input class="form-control" name="q" type="text" value="" placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
+            <input class="form-control" name="q" type="text" value=${this.q} placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
             <span class="input-group-btn">
               <button class="pure-button" style=${styleMap(clearButtonStyles)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙

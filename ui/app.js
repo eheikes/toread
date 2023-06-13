@@ -255,6 +255,7 @@ export class ToreadApp extends LitElement {
               ?any-selected=${this.selectedItems.length !== 0}
               ?no-previous=${this.offset === 0}
               ?no-next=${this.offset + this.limit >= this.stats.total}
+              q=${this.q}
             ></toread-controls>
             <ul class="entries">
               ${this.links.map((item) => {
@@ -283,6 +284,7 @@ export class ToreadApp extends LitElement {
               ?any-selected=${this.selectedItems.length !== 0}
               ?no-previous=${this.offset === 0}
               ?no-next=${this.offset + this.limit >= this.stats.total}
+              q=${this.q}
             ></toread-controls>
           </div>
         </div>
