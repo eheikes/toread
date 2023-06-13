@@ -22,7 +22,7 @@
     "dev": "run-p build:watch serve:ui",
     "lint": "standard --fix --verbose",
     "serve:ui": "http-server public",
-    "start": "node server.js",
+    "start": "node server/app.js",
     "test": "true"
   },
   "dependencies": {

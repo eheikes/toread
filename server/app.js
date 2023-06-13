@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
 import express from 'express'
 import { URL } from 'url'
-import { crawlWebpage } from './lib/crawl.js'
+import { crawlWebpage } from './crawl.js'
 import {
   addLink,
   deleteLinks,
@@ -9,8 +9,8 @@ import {
   getLinkCount,
   getLinks,
   getStats
-} from './lib/links.js'
-import { getSnapshot } from './lib/snapshot.js'
+} from './links.js'
+import { getSnapshot } from './snapshot.js'
 
 dotenv.config()
 
@@ -105,7 +105,7 @@ app.delete('/links/:id', async (req, res, next) => {
   }
 })
 
-const publicPath = new URL('public', import.meta.url).pathname
+const publicPath = new URL('../public', import.meta.url).pathname
 app.use(express.static(publicPath))
 
 app.use((err, _req, res, _next) => {
