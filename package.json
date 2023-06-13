@@ -20,7 +20,7 @@
     "build": "rollup -c rollup.config.js",
     "build:watch": "true",
     "dev": "run-p build:watch serve:ui",
-    "lint": "standard --fix --verbose",
+    "lint": "standard --fix --verbose 'server/**/*.js' 'ui/**/*.js' '*.js'",
     "serve:ui": "http-server public",
     "start": "node server/app.js",
     "test": "true"
