@@ -1,4 +1,5 @@
-import { LitElement, css, html, styleMap } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
+import { LitElement, css, html } from 'lit'
+import { styleMap } from 'lit/directives/style-map.js'
 
 export class ToreadControls extends LitElement {
   static properties = {

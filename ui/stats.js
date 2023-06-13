@@ -1,4 +1,4 @@
-import { LitElement, css, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@2.7.4/all/lit-all.min.js'
+import { LitElement, css, html } from 'lit'
 
 export class ToreadStats extends LitElement {
   static properties = {
