@@ -18,11 +18,10 @@
   "scripts": {
     "prebuild": "rimraf build",
     "build": "rollup -c rollup.config.js",
-    "build:watch": "true",
-    "dev": "run-p build:watch serve:ui",
+    "build:watch": "rollup -c rollup.config.js -w",
+    "dev": "run-p build:watch start",
     "lint": "standard --fix --verbose 'server/**/*.js' 'ui/**/*.js' '*.js'",
-    "serve:ui": "http-server public",
-    "start": "node server/app.js",
+    "start": "nodemon server/app.js",
     "test": "true"
   },
   "dependencies": {
@@ -38,8 +37,8 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-terser": "^0.4.3",
-    "http-server": "^14.1.1",
     "lit": "^2.7.4",
+    "nodemon": "^2.0.22",
     "npm-run-all": "^4.1.5",
     "rimraf": "^5.0.1",
     "rollup": "^3.24.0",
