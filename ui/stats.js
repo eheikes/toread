@@ -22,4 +22,3 @@ export class ToreadStats extends LitElement {
     `
   }
 }
-customElements.define('toread-stats', ToreadStats)

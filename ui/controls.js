@@ -124,4 +124,3 @@ export class ToreadControls extends LitElement {
     `
   }
 }
-customElements.define('toread-controls', ToreadControls)

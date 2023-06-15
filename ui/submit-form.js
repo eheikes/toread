@@ -139,4 +139,3 @@ export class ToreadSubmitForm extends LitElement {
     `
   }
 }
-customElements.define('toread-submit-form', ToreadSubmitForm)

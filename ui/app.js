@@ -1,14 +1,17 @@
 import { LitElement, css, html, nothing } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { createApi } from './api.js'
-// TODO add these as exports that import them elsewhere
-/* eslint-disable no-unused-vars */
 import { ToreadControls } from './controls.js' // needed to register the element
 import { ToreadStats } from './stats.js' // needed to register the element
 import { ToreadSubmitForm } from './submit-form.js' // needed to register the element
 import { ToreadTag } from './tag.js' // needed to register the element
 import { ToreadTags } from './tags.js' // needed to register the element
-/* eslint-enable no-unused-vars */
+
+customElements.define('toread-controls', ToreadControls)
+customElements.define('toread-stats', ToreadStats)
+customElements.define('toread-submit-form', ToreadSubmitForm)
+customElements.define('toread-tag', ToreadTag)
+customElements.define('toread-tags', ToreadTags)
 
 // Returns the current value from the URL parameters,
 //   or the default value if not set yet.

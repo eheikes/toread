@@ -39,4 +39,3 @@ export class ToreadTags extends LitElement {
     `
   }
 }
-customElements.define('toread-tags', ToreadTags)

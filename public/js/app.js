@@ -88,7 +88,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
           </div>
         </div>
       </form>
-    `}}customElements.define("toread-controls",ct);class ut extends et{static properties={"added-today":{type:Number},"added-week":{type:Number},"deleted-today":{type:Number},"deleted-week":{type:Number}};static styles=n`
+    `}}class ut extends et{static properties={"added-today":{type:Number},"added-week":{type:Number},"deleted-today":{type:Number},"deleted-week":{type:Number}};static styles=n`
     ins { color: red; text-decoration: none; }
     del { color: green; text-decoration: none; }
   `;render(){return R`
@@ -96,7 +96,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
         <ins>+${this["added-today"]}</ins>/<del>-${this["deleted-today"]}</del> today,
         <ins>+${this["added-week"]}</ins>/<del>-${this["deleted-week"]}</del> week.
       </span>
-    `}}customElements.define("toread-stats",ut);class pt extends et{static properties={"api-url":{type:String,attribute:!0},isDuplicate:{type:Boolean},isDuplicateDeleted:{type:Boolean},isSaving:{type:Boolean},saveFailed:{type:Boolean}};static styles=n`
+    `}}class pt extends et{static properties={"api-url":{type:String,attribute:!0},isDuplicate:{type:Boolean},isDuplicateDeleted:{type:Boolean},isSaving:{type:Boolean},saveFailed:{type:Boolean}};static styles=n`
     form { margin-bottom: 15px; }
     h2 { margin-top: 1.5em; margin-bottom: 0; }
     fieldset { padding: 0; border: 0; }
@@ -140,7 +140,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
           </div>
         </fieldset>
       </form>
-    `}}customElements.define("toread-submit-form",pt);class gt extends et{static properties={color:{type:String},"text-color":{type:String}};static styles=n`
+    `}}class gt extends et{static properties={color:{type:String},"text-color":{type:String}};static styles=n`
     span {
       display: inline;
       padding: .2em .6em .3em;
@@ -156,7 +156,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
   `;render(){return R`
       <span style="background-color: ${this.color}; color: ${this["text-color"]};">
         <slot></slot>
-      </span>`}}customElements.define("toread-tag",gt);class vt extends et{static properties={tags:{type:Array},filter:{type:Number}};static styles=n`
+      </span>`}}class vt extends et{static properties={tags:{type:Array},filter:{type:Number}};static styles=n`
     p { margin-bottom: 0.5em; }
     p:after { content: ""; display: table; clear: both; }
     p a { float: left; margin-bottom: 0.5em; }
@@ -169,7 +169,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
             class=${rt(e)}
           ><toread-tag color=${t.color} text-color=${t.contrastColor}>${t.name}</toread-tag></a>`}))}
       </p>
-    `}}function mt(t,e,s){const i=new URL(window.location).searchParams;return null===i.get(t)?e:s?parseInt(i.get(t),10):i.get(t)}customElements.define("toread-tags",vt);class ft extends et{static properties={actionInProgress:{type:Boolean,state:!0},"api-url":{type:String,attribute:!0},highlighted:{type:Number,state:!0},limit:{type:Number,state:!0},offset:{type:Number,state:!0},q:{type:String,state:!0},selectedItems:{type:Array,state:!0},stats:{type:Object,state:!0},tagFilter:{type:Number,state:!0},tags:{type:Array,state:!0}};static styles=n`
+    `}}function mt(t,e,s){const i=new URL(window.location).searchParams;return null===i.get(t)?e:s?parseInt(i.get(t),10):i.get(t)}customElements.define("toread-controls",ct),customElements.define("toread-stats",ut),customElements.define("toread-submit-form",pt),customElements.define("toread-tag",gt),customElements.define("toread-tags",vt);class ft extends et{static properties={actionInProgress:{type:Boolean,state:!0},"api-url":{type:String,attribute:!0},highlighted:{type:Number,state:!0},limit:{type:Number,state:!0},offset:{type:Number,state:!0},q:{type:String,state:!0},selectedItems:{type:Array,state:!0},stats:{type:Object,state:!0},tagFilter:{type:Number,state:!0},tags:{type:Array,state:!0}};static styles=n`
     h1 { margin-bottom: 0; }
     p { margin-top: .25em; }
     a { text-decoration: none; color: #337ab7; background: transparent; }

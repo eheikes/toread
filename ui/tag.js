@@ -28,4 +28,3 @@ export class ToreadTag extends LitElement {
       </span>`
   }
 }
-customElements.define('toread-tag', ToreadTag)
