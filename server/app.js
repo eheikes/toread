@@ -33,6 +33,10 @@ app.get('/', async (req, res, next) => {
   }
 })
 
+app.get('/toread.php', async (_req, res) => {
+  res.redirect(301, process.env.BASE_PATH)
+})
+
 app.get('/snapshot', async (req, res, next) => {
   try {
     if (req.query.id) {
