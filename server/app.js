@@ -1,3 +1,4 @@
+import { boolean } from 'boolean'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
 import express from 'express'
@@ -18,6 +19,7 @@ dotenv.config()
 const app = express()
 
 app.set('etag', false) // prevents 304 Not Modified responses
+app.set('x-powered-by', boolean(process.env.DEBUG))
 
 const viewsPath = new URL('views', import.meta.url).pathname
 app.set('views', viewsPath)
