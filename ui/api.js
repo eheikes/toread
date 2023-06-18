@@ -4,7 +4,7 @@ export function createApi (baseUrl) {
       console.log('*** get()', params)
       const searchParams = new URLSearchParams(params)
       const url = `${baseUrl}/links?${searchParams}`
-      return fetch(url, { method: 'GET' }).then(response => {
+      return fetch(url, { method: 'GET', mode: 'cors' }).then(response => {
         if (!response.ok) {
           throw new Error(`Could not get links from ${url} (type ${response.type}, status ${response.status})`)
         }
@@ -17,7 +17,7 @@ export function createApi (baseUrl) {
       const searchParams = new URLSearchParams(params)
       searchParams.set('check', 'true')
       const url = `${baseUrl}/links?${searchParams}`
-      return fetch(url, { method: 'GET' }).then(response => {
+      return fetch(url, { method: 'GET', mode: 'cors' }).then(response => {
         if (!response.ok) {
           throw new Error(`Could not check link from server ${url} (type ${response.type}, status ${response.status})`)
         }
@@ -31,6 +31,7 @@ export function createApi (baseUrl) {
       return fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
       }).then(response => {
         if (!response.ok) {
@@ -44,7 +45,7 @@ export function createApi (baseUrl) {
       console.log('*** remove()', idsArray)
       return Promise.all(
         idsArray.map(id => {
-          return fetch(`${baseUrl}/links/${id}`, { method: 'DELETE' })
+          return fetch(`${baseUrl}/links/${id}`, { method: 'DELETE', mode: 'cors' })
         })
       ).then(responses => {
         return responses.map(response => {

@@ -1,3 +1,4 @@
+import cors from 'cors'
 import * as dotenv from 'dotenv'
 import express from 'express'
 import { URL } from 'url'
@@ -62,7 +63,7 @@ app.get('/snapshot', async (req, res, next) => {
   }
 })
 
-app.get('/links', async (req, res, next) => {
+app.get('/links', cors(), async (req, res, next) => {
   try {
     const links = await getLinks(req.query)
     const total = await getLinkCount(req.query.q, req.query.tag)
@@ -79,7 +80,7 @@ app.get('/links', async (req, res, next) => {
   }
 })
 
-app.post('/links', async (req, res, next) => {
+app.post('/links', cors(), async (req, res, next) => {
   try {
     console.log('*** POST /links', req.body)
     const url = req.body.url ?? ''
@@ -96,7 +97,8 @@ app.post('/links', async (req, res, next) => {
   }
 })
 
-app.delete('/links/:id', async (req, res, next) => {
+app.options('/links/:id', cors())
+app.delete('/links/:id', cors(), async (req, res, next) => {
   try {
     const formattedId = parseInt(req.params.id, 10)
     const { success, ids } = await deleteLinks([formattedId])
