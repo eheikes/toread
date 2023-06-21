@@ -26,17 +26,12 @@ var Y,tt;class et extends v{constructor(){super(...arguments),this.renderOptions
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,s){this._$Ct=t,this._$AM=e,this._$Ci=s}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
+const it=1;class ot{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,s){this._$Ct=t,this._$AM=e,this._$Ci=s}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}
 /**
  * @license
  * Copyright 2018 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const rt=ot(class extends nt{constructor(t){var e;if(super(t),t.type!==it||"class"!==t.name||(null===(e=t.strings)||void 0===e?void 0:e.length)>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return" "+Object.keys(t).filter((e=>t[e])).join(" ")+" "}update(t,[e]){var s,i;if(void 0===this.it){this.it=new Set,void 0!==t.strings&&(this.nt=new Set(t.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in e)e[t]&&!(null===(s=this.nt)||void 0===s?void 0:s.has(t))&&this.it.add(t);return this.render(e)}const o=t.element.classList;this.it.forEach((t=>{t in e||(o.remove(t),this.it.delete(t))}));for(const t in e){const s=!!e[t];s===this.it.has(t)||(null===(i=this.nt)||void 0===i?void 0:i.has(t))||(s?(o.add(t),this.it.add(t)):(o.remove(t),this.it.delete(t)))}return O}});function at(t){return{get:function(e){console.log("*** get()",e);const s=new URLSearchParams(e),i=`${t}/links?${s}`;return fetch(i,{method:"GET",mode:"cors"}).then((t=>{if(!t.ok)throw new Error(`Could not get links from ${i} (type ${t.type}, status ${t.status})`);return t.json()}))},check:function(e){console.log("*** check()",e);const s=new URLSearchParams(e);s.set("check","true");const i=`${t}/links?${s}`;return fetch(i,{method:"GET",mode:"cors"}).then((t=>{if(!t.ok)throw new Error(`Could not check link from server ${i} (type ${t.type}, status ${t.status})`);return t.json()}))},add:function(e){console.log("*** add()",e);const s=`${t}/links`;return fetch(s,{method:"POST",body:JSON.stringify(e),mode:"cors",headers:{"Content-Type":"application/json"}}).then((t=>{if(!t.ok)throw new Error(`Could not add link on server ${s} (type ${t.type}, status ${t.status})`);return t.json()}))},remove:function(e){return console.log("*** remove()",e),Promise.all(e.map((e=>fetch(`${t}/links/${e}`,{method:"DELETE",mode:"cors"})))).then((t=>t.map((t=>{if(!t.ok)throw new Error(`Could not remove link from server (type ${t.type}, status ${t.status})`);return t.json()}))))}}}
-/**
- * @license
- * Copyright 2018 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */const lt="important",ht=" !"+lt,dt=ot(class extends nt{constructor(t){var e;if(super(t),t.type!==it||"style"!==t.name||(null===(e=t.strings)||void 0===e?void 0:e.length)>2)throw Error("The `styleMap` directive must be used in the `style` attribute and must be the only part in the attribute.")}render(t){return Object.keys(t).reduce(((e,s)=>{const i=t[s];return null==i?e:e+`${s=s.includes("-")?s:s.replace(/(?:^(webkit|moz|ms|o)|)(?=[A-Z])/g,"-$&").toLowerCase()}:${i};`}),"")}update(t,[e]){const{style:s}=t.element;if(void 0===this.ut){this.ut=new Set;for(const t in e)this.ut.add(t);return this.render(e)}this.ut.forEach((t=>{null==e[t]&&(this.ut.delete(t),t.includes("-")?s.removeProperty(t):s[t]="")}));for(const t in e){const i=e[t];if(null!=i){this.ut.add(t);const e="string"==typeof i&&i.endsWith(ht);t.includes("-")||e?s.setProperty(t,e?i.slice(0,-11):i,e?lt:""):s[t]=i}}return O}});class ct extends et{static properties={disabled:{type:Boolean},"any-selected":{type:Boolean},"no-previous":{type:Boolean},"no-next":{type:Boolean},q:{type:String}};static styles=n`
+ */const nt=(t=>(...e)=>({_$litDirective$:t,values:e}))(class extends ot{constructor(t){var e;if(super(t),t.type!==it||"class"!==t.name||(null===(e=t.strings)||void 0===e?void 0:e.length)>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return" "+Object.keys(t).filter((e=>t[e])).join(" ")+" "}update(t,[e]){var s,i;if(void 0===this.it){this.it=new Set,void 0!==t.strings&&(this.nt=new Set(t.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in e)e[t]&&!(null===(s=this.nt)||void 0===s?void 0:s.has(t))&&this.it.add(t);return this.render(e)}const o=t.element.classList;this.it.forEach((t=>{t in e||(o.remove(t),this.it.delete(t))}));for(const t in e){const s=!!e[t];s===this.it.has(t)||(null===(i=this.nt)||void 0===i?void 0:i.has(t))||(s?(o.add(t),this.it.add(t)):(o.remove(t),this.it.delete(t)))}return O}});function rt(t){return{get:function(e){console.log("*** get()",e);const s=new URLSearchParams(e),i=`${t}/links?${s}`;return fetch(i,{method:"GET",mode:"cors"}).then((t=>{if(!t.ok)throw new Error(`Could not get links from ${i} (type ${t.type}, status ${t.status})`);return t.json()}))},check:function(e){console.log("*** check()",e);const s=new URLSearchParams(e);s.set("check","true");const i=`${t}/links?${s}`;return fetch(i,{method:"GET",mode:"cors"}).then((t=>{if(!t.ok)throw new Error(`Could not check link from server ${i} (type ${t.type}, status ${t.status})`);return t.json()}))},add:function(e){console.log("*** add()",e);const s=`${t}/links`;return fetch(s,{method:"POST",body:JSON.stringify(e),mode:"cors",headers:{"Content-Type":"application/json"}}).then((t=>{if(!t.ok)throw new Error(`Could not add link on server ${s} (type ${t.type}, status ${t.status})`);return t.json()}))},remove:function(e){return console.log("*** remove()",e),Promise.all(e.map((e=>fetch(`${t}/links/${e}`,{method:"DELETE",mode:"cors"})))).then((t=>t.map((t=>{if(!t.ok)throw new Error(`Could not remove link from server (type ${t.type}, status ${t.status})`);return t.json()}))))}}}class at extends et{static properties={disabled:{type:Boolean},"any-selected":{type:Boolean},"no-previous":{type:Boolean},"no-next":{type:Boolean},q:{type:String}};static styles=n`
     .controls > div { margin-bottom: 15px; }
     .search { width: 90%; }
     .search input { width: 100%; }
@@ -64,12 +59,13 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
         box-shadow: none;
       }
       .search button {
+        display: inline;
         background-color: #666;
         color: #ccc;
       }
     }
 
-  `;constructor(){super(),this.disabled=!1,this["any-selected"]=!1,this["no-previous"]=!1,this["no-next"]=!1,this.q=null}changePage(t,e){t.preventDefault();const s=new CustomEvent("changePage",{bubbles:!0,composed:!0,detail:{offset:e}});this.dispatchEvent(s)}clearSearch(t){t.preventDefault(),this.q="";const e=this.shadowRoot.querySelector('input[name="q"]');e.value="",e.focus();const s=new CustomEvent("clearSearch",{bubbles:!0,composed:!0});this.dispatchEvent(s)}deleteSelected(t){t.preventDefault();const e=new CustomEvent("deleteSelected",{bubbles:!0,composed:!0});this.dispatchEvent(e)}search(t){t.preventDefault();const e=this.shadowRoot.querySelector('input[name="q"]');this.q=e.value;const s=new CustomEvent("search",{bubbles:!0,composed:!0,detail:{phrase:this.q}});this.dispatchEvent(s)}render(){const t={display:""!==this.q?"inline":"none"};return R`
+  `;constructor(){super(),this.disabled=!1,this["any-selected"]=!1,this["no-previous"]=!1,this["no-next"]=!1,this.q=null}changePage(t,e){t.preventDefault();const s=new CustomEvent("changePage",{bubbles:!0,composed:!0,detail:{offset:e}});this.dispatchEvent(s)}clearSearch(t){t.preventDefault(),this.q="";const e=this.shadowRoot.querySelector('input[name="q"]');e.value="",e.focus();const s=new CustomEvent("clearSearch",{bubbles:!0,composed:!0});this.dispatchEvent(s)}deleteSelected(t){t.preventDefault();const e=new CustomEvent("deleteSelected",{bubbles:!0,composed:!0});this.dispatchEvent(e)}search(t){t.preventDefault();const e=this.shadowRoot.querySelector('input[name="q"]');this.q=e.value;const s=new CustomEvent("search",{bubbles:!0,composed:!0,detail:{phrase:this.q}});this.dispatchEvent(s)}render(){return R`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <form class="controls pure-form pure-g">
         <div class="pure-u-1-2">
@@ -81,14 +77,14 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
           <div class="search pure-button-group" role="group" aria-label="Search">
             <input class="form-control" name="q" type="text" value=${this.q} placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
             <span class="input-group-btn">
-              <button class="pure-button" style=${dt(t)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
+              <button class="pure-button" ?hidden=${""===this.q} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙
               </button>
             </span>
           </div>
         </div>
       </form>
-    `}}class ut extends et{static properties={"added-today":{type:Number},"added-week":{type:Number},"deleted-today":{type:Number},"deleted-week":{type:Number}};static styles=n`
+    `}}class lt extends et{static properties={"added-today":{type:Number},"added-week":{type:Number},"deleted-today":{type:Number},"deleted-week":{type:Number}};static styles=n`
     ins { color: red; text-decoration: none; }
     del { color: green; text-decoration: none; }
   `;render(){return R`
@@ -96,7 +92,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
         <ins>+${this["added-today"]}</ins>/<del>-${this["deleted-today"]}</del> today,
         <ins>+${this["added-week"]}</ins>/<del>-${this["deleted-week"]}</del> week.
       </span>
-    `}}class pt extends et{static properties={"api-url":{type:String,attribute:!0},isDuplicate:{type:Boolean},isDuplicateDeleted:{type:Boolean},isSaving:{type:Boolean},saveFailed:{type:Boolean}};static styles=n`
+    `}}class ht extends et{static properties={"api-url":{type:String,attribute:!0},isDuplicate:{type:Boolean},isDuplicateDeleted:{type:Boolean},isSaving:{type:Boolean},saveFailed:{type:Boolean}};static styles=n`
     form { margin-bottom: 15px; }
     h2 { margin-top: 1.5em; margin-bottom: 0; }
     fieldset { padding: 0; border: 0; }
@@ -114,7 +110,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
         background-color: #00386bfa;
       }
     }
-  `;constructor(){super(),this.isDuplicate=!1,this.isDuplicateDeleted=!1,this.isSaving=!1,this.saveFailed=!1,this["api-url"]="",this.api=at(this["api-url"])}checkUrl(t){t.preventDefault(),this.isDuplicate=!1,this.isDuplicateDeleted=!1;const e=this.shadowRoot.querySelector('input[name="url"]').value;e&&this.api.check({url:e}).then((t=>{this.isDuplicate=t.links.length>0,this.isDuplicateDeleted=!0,t.links.forEach((t=>{t.deleted||(this.isDuplicateDeleted=!1)}))}))}clearForm(){const t=this.shadowRoot.querySelector("form"),e=[...t.querySelectorAll('input[type="text"]'),...t.querySelectorAll("textarea")];for(const t of e)t.value="";this.isDuplicate=!1,this.isDuplicateDeleted=!1,this.isSaving=!1,this.saveFailed=!1}submit(t){t.preventDefault(),this.isSaving=!0,this.saveFailed=!1;const e=new FormData(this.shadowRoot.querySelector("form"));this.api.add({url:e.get("url"),tags:e.get("tags"),keywords:e.get("keywords")}).then((t=>{if(!t.success)return void(this.saveFailed=!0);this.data={};const e=new Event("refreshList",{bubbles:!0,composed:!0});this.dispatchEvent(e),this.clearForm()})).catch((()=>{this.saveFailed=!0})).finally((()=>{this.isSaving=!1}))}render(){return R`
+  `;constructor(){super(),this.isDuplicate=!1,this.isDuplicateDeleted=!1,this.isSaving=!1,this.saveFailed=!1,this["api-url"]="",this.api=rt(this["api-url"])}checkUrl(t){t.preventDefault(),this.isDuplicate=!1,this.isDuplicateDeleted=!1;const e=this.shadowRoot.querySelector('input[name="url"]').value;e&&this.api.check({url:e}).then((t=>{this.isDuplicate=t.links.length>0,this.isDuplicateDeleted=!0,t.links.forEach((t=>{t.deleted||(this.isDuplicateDeleted=!1)}))}))}clearForm(){const t=this.shadowRoot.querySelector("form"),e=[...t.querySelectorAll('input[type="text"]'),...t.querySelectorAll("textarea")];for(const t of e)t.value="";this.isDuplicate=!1,this.isDuplicateDeleted=!1,this.isSaving=!1,this.saveFailed=!1}submit(t){t.preventDefault(),this.isSaving=!0,this.saveFailed=!1;const e=new FormData(this.shadowRoot.querySelector("form"));this.api.add({url:e.get("url"),tags:e.get("tags"),keywords:e.get("keywords")}).then((t=>{if(!t.success)return void(this.saveFailed=!0);this.data={};const e=new Event("refreshList",{bubbles:!0,composed:!0});this.dispatchEvent(e),this.clearForm()})).catch((()=>{this.saveFailed=!0})).finally((()=>{this.isSaving=!1}))}render(){return R`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <form @submit=${this.submit} class="pure-form pure-form-stacked">
         <h2>Add New Link</h2>
@@ -140,7 +136,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
           </div>
         </fieldset>
       </form>
-    `}}class gt extends et{static properties={color:{type:String},"text-color":{type:String}};static styles=n`
+    `}}class dt extends et{static properties={color:{type:String},"text-color":{type:String}};static styles=n`
     span {
       display: inline;
       padding: .2em .6em .3em;
@@ -156,7 +152,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
   `;render(){return R`
       <span style="background-color: ${this.color}; color: ${this["text-color"]};">
         <slot></slot>
-      </span>`}}class vt extends et{static properties={tags:{type:Array},filter:{type:Number}};static styles=n`
+      </span>`}}class ct extends et{static properties={tags:{type:Array},filter:{type:Number}};static styles=n`
     p { margin-bottom: 0.5em; }
     p:after { content: ""; display: table; clear: both; }
     p a { float: left; margin-bottom: 0.5em; }
@@ -166,10 +162,10 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
       <p>
         ${this.tags.map((t=>{const e={faded:this.filter&&this.filter!==t.id};return R`<a href
             @click=${{handleEvent:e=>this.toggleTag(e,t.id)}}
-            class=${rt(e)}
+            class=${nt(e)}
           ><toread-tag color=${t.color} text-color=${t.contrastColor}>${t.name}</toread-tag></a>`}))}
       </p>
-    `}}function mt(t,e,s){const i=new URL(window.location).searchParams;return null===i.get(t)?e:s?parseInt(i.get(t),10):i.get(t)}customElements.define("toread-controls",ct),customElements.define("toread-stats",ut),customElements.define("toread-submit-form",pt),customElements.define("toread-tag",gt),customElements.define("toread-tags",vt);class ft extends et{static properties={actionInProgress:{type:Boolean,state:!0},"api-url":{type:String,attribute:!0},highlighted:{type:Number,state:!0},limit:{type:Number,state:!0},offset:{type:Number,state:!0},q:{type:String,state:!0},selectedItems:{type:Array,state:!0},stats:{type:Object,state:!0},tagFilter:{type:Number,state:!0},tags:{type:Array,state:!0}};static styles=n`
+    `}}function ut(t,e,s){const i=new URL(window.location).searchParams;return null===i.get(t)?e:s?parseInt(i.get(t),10):i.get(t)}customElements.define("toread-controls",at),customElements.define("toread-stats",lt),customElements.define("toread-submit-form",ht),customElements.define("toread-tag",dt),customElements.define("toread-tags",ct);class pt extends et{static properties={actionInProgress:{type:Boolean,state:!0},"api-url":{type:String,attribute:!0},highlighted:{type:Number,state:!0},limit:{type:Number,state:!0},offset:{type:Number,state:!0},q:{type:String,state:!0},selectedItems:{type:Array,state:!0},stats:{type:Object,state:!0},tagFilter:{type:Number,state:!0},tags:{type:Array,state:!0}};static styles=n`
     h1 { margin-bottom: 0; }
     p { margin-top: .25em; }
     a { text-decoration: none; color: #337ab7; background: transparent; }
@@ -181,7 +177,7 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
     .highlight { background: yellow; }
     .snapshot { margin-left: 0.25em; text-decoration: none; }
     .strike { text-decoration: line-through; }
-  `;constructor(){super(),this.actionInProgress=!1,this.highlighted=mt("highlighted",null),this.q=mt("q",""),this.offset=mt("offset",0,!0),this.limit=mt("limit",20,!0),this.selectedItems=[],this.tagFilter=mt("tag",null,!0),this.stats={},this.links=[],this.tags=[],this.addEventListener("changePage",this.changePage),this.addEventListener("clearSearch",this.clearSearch),this.addEventListener("deleteSelected",this.deleteSelected),this.addEventListener("refreshList",this.showList),this.addEventListener("search",this.search),this.addEventListener("toggleTag",this.toggleTag),this["api-url"]="",this.api=at(this["api-url"]),this.showList().then((()=>{null!==this.highlighted&&this.highlightOffset(this.highlighted)}))}changePage(t){this.offset=this.offset+this.limit*t.detail.offset,(this.offset<0||this.offset>=this.stats.total)&&(this.offset=0),this.clearSelected(),this.showList()}chooseRandom(t){t.preventDefault();const e=(s=0,i=this.stats.total-1,Math.floor(Math.random()*(i-s+1))+s);var s,i;const o=e%this.limit;console.log("Choosing random..."),console.log("stats:",this.stats),console.log("chosenIndex:",e),console.log("remainder:",o),this.offset=parseInt(e/this.limit,10)*this.limit,console.log("new offset:",this.offset),this.showList().then((()=>{this.highlighted=o,this.pushState(),this.highlightOffset(o)}))}clearSearch(t){this.q="",this.showList()}clearSelected(){this.selectedItems=[];const t=this.shadowRoot.querySelectorAll('input[type="checkbox"]');for(const e of t)e.checked=!1}deleteSelected(t){this.actionInProgress=!0,this.api.remove(this.selectedItems).then((()=>{this.clearSelected(),this.showList()})).finally((()=>{this.actionInProgress=!1}))}highlightOffset(t){this.links=this.links.map(((e,s)=>({...e,highlighted:t===s})));this.shadowRoot.querySelectorAll(".entries li")[t].scrollIntoView({behavior:"smooth"})}pushState=function(){const t=new URL(window.location);null!==this.highlighted&&t.searchParams.set("highlighted",this.highlighted),null!==this.limit&&t.searchParams.set("limit",this.limit),null!==this.tagFilter&&t.searchParams.set("tag",this.tagFilter),t.searchParams.set("offset",this.offset),t.searchParams.set("q",this.q),history.pushState({},"",t.toString())};search(t){this.q=t?.detail?.phrase??"",this.offset=0,this.showList()}showList(){return this.api.get({q:this.q??"",tag:this.tagFilter??"",offset:this.offset??"",count:this.limit??""}).then((t=>{this.tags=t.tags,this.links=t.links,this.stats={...t.stats,total:t.total},this.pushState()}))}toggleTag(t){this.tagFilter=this.tagFilter===t.detail.tagId?null:t.detail.tagId,this.offset=0,this.showList()}updatedSelected(t){this.selectedItems=[...this.shadowRoot.querySelectorAll('input[type="checkbox"]')].map((t=>t.checked?t.value:null)).filter((t=>null!==t))}render(){return R`
+  `;constructor(){super(),this.actionInProgress=!1,this.highlighted=ut("highlighted",null),this.q=ut("q",""),this.offset=ut("offset",0,!0),this.limit=ut("limit",20,!0),this.selectedItems=[],this.tagFilter=ut("tag",null,!0),this.stats={},this.links=[],this.tags=[],this.addEventListener("changePage",this.changePage),this.addEventListener("clearSearch",this.clearSearch),this.addEventListener("deleteSelected",this.deleteSelected),this.addEventListener("refreshList",this.showList),this.addEventListener("search",this.search),this.addEventListener("toggleTag",this.toggleTag),this["api-url"]="",this.api=rt(this["api-url"]),this.showList().then((()=>{null!==this.highlighted&&this.highlightOffset(this.highlighted)}))}changePage(t){this.offset=this.offset+this.limit*t.detail.offset,(this.offset<0||this.offset>=this.stats.total)&&(this.offset=0),this.clearSelected(),this.showList()}chooseRandom(t){t.preventDefault();const e=(s=0,i=this.stats.total-1,Math.floor(Math.random()*(i-s+1))+s);var s,i;const o=e%this.limit;console.log("Choosing random..."),console.log("stats:",this.stats),console.log("chosenIndex:",e),console.log("remainder:",o),this.offset=parseInt(e/this.limit,10)*this.limit,console.log("new offset:",this.offset),this.showList().then((()=>{this.highlighted=o,this.pushState(),this.highlightOffset(o)}))}clearSearch(t){this.q="",this.showList()}clearSelected(){this.selectedItems=[];const t=this.shadowRoot.querySelectorAll('input[type="checkbox"]');for(const e of t)e.checked=!1}deleteSelected(t){this.actionInProgress=!0,this.api.remove(this.selectedItems).then((()=>{this.clearSelected(),this.showList()})).finally((()=>{this.actionInProgress=!1}))}highlightOffset(t){this.links=this.links.map(((e,s)=>({...e,highlighted:t===s})));this.shadowRoot.querySelectorAll(".entries li")[t].scrollIntoView({behavior:"smooth"})}pushState=function(){const t=new URL(window.location);null!==this.highlighted&&t.searchParams.set("highlighted",this.highlighted),null!==this.limit&&t.searchParams.set("limit",this.limit),null!==this.tagFilter&&t.searchParams.set("tag",this.tagFilter),t.searchParams.set("offset",this.offset),t.searchParams.set("q",this.q),history.pushState({},"",t.toString())};search(t){this.q=t?.detail?.phrase??"",this.offset=0,this.showList()}showList(){return this.api.get({q:this.q??"",tag:this.tagFilter??"",offset:this.offset??"",count:this.limit??""}).then((t=>{this.tags=t.tags,this.links=t.links,this.stats={...t.stats,total:t.total},this.pushState()}))}toggleTag(t){this.tagFilter=this.tagFilter===t.detail.tagId?null:t.detail.tagId,this.offset=0,this.showList()}updatedSelected(t){this.selectedItems=[...this.shadowRoot.querySelectorAll('input[type="checkbox"]')].map((t=>t.checked?t.value:null)).filter((t=>null!==t))}render(){return R`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <div class="pure-g">
         <div class="pure-u-2-3">
@@ -208,9 +204,9 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
             ></toread-controls>
             <ul class="entries">
               ${this.links.map((t=>{const e=new Date(t.time),s=new Intl.DateTimeFormat("en-US",{dateStyle:"short"}).format(e),i={highlight:t.highlighted},o={strike:t.deleted};return R`
-                  <li class=${rt(i)}>
+                  <li class=${nt(i)}>
                     <input type="checkbox" name="id" value="${t.id}" ?disabled=${this.actionInProgress} @change=${this.updatedSelected}>
-                    <a href=${t.link} class=${rt(o)} target="_blank">${t.title}</a>
+                    <a href=${t.link} class=${nt(o)} target="_blank">${t.title}</a>
                     ${t.hasSnapshot?R`<a href="snapshot?id=${t.id}" class="snapshot" target="_blank" title="View snapshot">🕶️</a>`:I}
                     <span class="date">${s}</span>
                     <span class="tags">
@@ -235,4 +231,4 @@ const it=1,ot=t=>(...e)=>({_$litDirective$:t,values:e});let nt=class{constructor
           <toread-submit-form api-url=${this["api-url"]}></toread-submit-form>
         </div>
       </div>
-    `}}customElements.define("toread-app",ft);
+    `}}customElements.define("toread-app",pt);

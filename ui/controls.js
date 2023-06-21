@@ -38,6 +38,7 @@ export class ToreadControls extends LitElement {
         box-shadow: none;
       }
       .search button {
+        display: inline;
         background-color: #666;
         color: #ccc;
       }
@@ -99,9 +100,6 @@ export class ToreadControls extends LitElement {
   }
 
   render () {
-    const clearButtonStyles = {
-      display: this.q !== '' ? 'inline' : 'none'
-    }
     return html`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <form class="controls pure-form pure-g">
@@ -114,7 +112,7 @@ export class ToreadControls extends LitElement {
           <div class="search pure-button-group" role="group" aria-label="Search">
             <input class="form-control" name="q" type="text" value=${this.q} placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
             <span class="input-group-btn">
-              <button class="pure-button" style=${styleMap(clearButtonStyles)} type="button" aria-label="Clear search" @click=${this.clearSearch}>
+              <button class="pure-button" ?hidden=${this.q === ''} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙
               </button>
             </span>
