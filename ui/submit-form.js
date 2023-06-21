@@ -101,15 +101,6 @@ export class ToreadSubmitForm extends LitElement {
   }
 
   render () {
-    const duplicateErrorStyles = {
-      display: this.isDuplicate ? 'block' : 'none'
-    }
-    const duplicateDeletedErrorStyles = {
-      display: this.isDuplicateDeleted ? 'inline' : 'none'
-    }
-    const saveErrorStyles = {
-      display: this.saveFailed ? 'block' : 'none'
-    }
     return html`
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
       <form @submit=${this.submit} class="pure-form pure-form-stacked">
@@ -118,8 +109,8 @@ export class ToreadSubmitForm extends LitElement {
           <div>
             <label for="new-url" title="Link URL">URL</label>
             <input id="new-url" type="text" name="url" value="" accesskey="n" @keyup=${this.checkUrl}>
-            <div class="error" style=${styleMap(duplicateErrorStyles)}>
-              ⚠️ This link already exists<span style=${styleMap(duplicateDeletedErrorStyles)}> (but has been deleted)</span>.
+            <div class="error" ?hidden=${!this.isDuplicate}>
+              ⚠️ This link already exists<span ?hidden=${!this.isDuplicateDeleted}> (but has been deleted)</span>.
             </div>
           </div>
           <div>
@@ -131,7 +122,7 @@ export class ToreadSubmitForm extends LitElement {
             <textarea id="new-description" name="keywords" rows="5" cols="50" placeholder="when saving a reference"></textarea>
           </div>
           <input type="submit" class="pure-button pure-button-primary" value="Add">
-          <div class="error" style=${styleMap(saveErrorStyles)}>
+          <div class="error" ?hidden=${!this.saveFailed}>
             ⚠️ There was an error saving the link.
           </div>
         </fieldset>
