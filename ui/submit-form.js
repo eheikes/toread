@@ -1,5 +1,4 @@
 import { LitElement, css, html } from 'lit'
-import { styleMap } from 'lit/directives/style-map.js'
 import { createApi } from './api.js'
 
 export class ToreadSubmitForm extends LitElement {
