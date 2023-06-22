@@ -83,6 +83,11 @@ app.get('/links', cors(), async (req, res, next) => {
 })
 
 app.post('/links', cors(), async (req, res, next) => {
+  if (!req.body.url) {
+    res.status(400)
+    res.send('URL field is missing')
+    return
+  }
   try {
     console.log('*** POST /links', req.body)
     const url = req.body.url ?? ''
