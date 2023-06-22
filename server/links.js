@@ -1,6 +1,7 @@
 import { decode } from 'html-entities'
 import { getColor, getContrastColor } from './color.js'
 import { getDatabaseConnection } from './database.js'
+import { log } from './log.js'
 
 const joinCategories = (sqlBuilder) => {
   return sqlBuilder.join('links_to_categories', {
@@ -220,7 +221,7 @@ export const addLink = async (url, title, html, keywords, rawTags) => {
       })
     }
   } catch (e) {
-    console.log(e.stack)
+    log('ERROR', e.stack)
     return {
       success: false,
       id: null
@@ -239,7 +240,7 @@ export const deleteLinks = async (ids) => {
       .update({ deleted: db.raw('NOW()') })
       .whereIn('id', ids)
   } catch (e) {
-    console.log(e.stack)
+    log('ERROR', e.stack)
     return {
       success: false,
       ids: []

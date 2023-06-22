@@ -12,6 +12,7 @@ import {
   getLinks,
   getStats
 } from './links.js'
+import { log } from './log.js'
 import { getSnapshot } from './snapshot.js'
 
 dotenv.config()
@@ -41,6 +42,7 @@ app.get('/toread.php', async (_req, res) => {
 })
 
 app.get('/snapshot', async (req, res, next) => {
+  log('GET /snapshot', req.query)
   try {
     if (req.query.id) {
       res.type('html')
@@ -66,6 +68,7 @@ app.get('/snapshot', async (req, res, next) => {
 })
 
 app.get('/links', cors(), async (req, res, next) => {
+  log('GET /links', req.query)
   try {
     const links = await getLinks(req.query)
     const total = await getLinkCount(req.query.q, req.query.tag)
@@ -83,13 +86,13 @@ app.get('/links', cors(), async (req, res, next) => {
 })
 
 app.post('/links', cors(), async (req, res, next) => {
+  log('POST /links', req.body)
   if (!req.body.url) {
     res.status(400)
     res.send('URL field is missing')
     return
   }
   try {
-    console.log('*** POST /links', req.body)
     const url = req.body.url ?? ''
     const keywords = req.body.keywords ? req.body.keywords.trim() : ''
     const tags = req.body.tags ?? ''
@@ -106,6 +109,7 @@ app.post('/links', cors(), async (req, res, next) => {
 
 app.options('/links/:id', cors())
 app.delete('/links/:id', cors(), async (req, res, next) => {
+  log('DELETE /links/:id', req.params)
   try {
     const formattedId = parseInt(req.params.id, 10)
     const { success, ids } = await deleteLinks([formattedId])
@@ -122,11 +126,11 @@ const publicPath = new URL('../public', import.meta.url).pathname
 app.use(express.static(publicPath))
 
 app.use((err, _req, res, _next) => {
-  console.error(err.stack)
+  log('ERROR', err.stack)
   res.status(500).send('Internal Server Error')
 })
 
 const port = parseInt(process.env.SERVER_PORT, 10)
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+  log(`Server listening on port ${port}`)
 })

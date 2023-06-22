@@ -1,5 +1,6 @@
 import { boolean } from 'boolean'
 import knex from 'knex'
+import { log } from './log.js'
 
 let db = null
 
@@ -11,6 +12,20 @@ export const getDatabaseConnection = () => {
   }
   const config = {
     debug: boolean(process.env.DEBUG),
+    log: {
+      warn: (info) => {
+        log('WARN', info)
+      },
+      error: (info) => {
+        log('ERROR', info)
+      },
+      deprecate: (info) => {
+        log('DEPRECATED', info)
+      },
+      debug: (info) => {
+        log('Database query', info)
+      },
+    },
     client: 'mysql2',
     connection: {
       host: process.env.DB_HOST,
