@@ -2,6 +2,7 @@ import { LitElement, css, html, nothing } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { createApi } from './api.js'
 import { ToreadControls } from './controls.js' // needed to register the element
+import { log } from './log.js' // needed to register the element
 import { ToreadStats } from './stats.js' // needed to register the element
 import { ToreadSubmitForm } from './submit-form.js' // needed to register the element
 import { ToreadTag } from './tag.js' // needed to register the element
@@ -134,13 +135,13 @@ export class ToreadApp extends LitElement {
     event.preventDefault()
     const chosenIndex = random(0, this.stats.total - 1)
     const remainder = chosenIndex % this.limit
-    console.log('Choosing random...')
-    console.log('stats:', this.stats)
-    console.log('chosenIndex:', chosenIndex)
-    console.log('remainder:', remainder)
+    log('Choosing random')
+    log('  stats:', this.stats)
+    log('  chosen index:', chosenIndex)
+    log('  remainder:', remainder)
 
     this.offset = parseInt(chosenIndex / this.limit, 10) * this.limit
-    console.log('new offset:', this.offset)
+    log('  new offset:', this.offset)
     this.showList().then(() => {
       this.highlighted = remainder
       this.pushState()
@@ -149,11 +150,13 @@ export class ToreadApp extends LitElement {
   }
 
   clearSearch (_event) {
+    log('Clearing search')
     this.q = ''
     this.showList()
   }
 
   clearSelected () {
+    log('Clearing selected')
     this.selectedItems = []
     const inputEls = this.shadowRoot.querySelectorAll('input[type="checkbox"]')
     for (const el of inputEls) {
@@ -162,6 +165,7 @@ export class ToreadApp extends LitElement {
   }
 
   deleteSelected (_event) {
+    log('Deleting selected')
     this.actionInProgress = true
     this.api.remove(this.selectedItems).then(() => {
       this.clearSelected()
@@ -205,6 +209,7 @@ export class ToreadApp extends LitElement {
   }
 
   showList () {
+    log('Updating list')
     return this.api.get({
       q: this.q ?? '',
       tag: this.tagFilter ?? '',
@@ -222,6 +227,7 @@ export class ToreadApp extends LitElement {
   }
 
   toggleTag (event) {
+    log('Toggling tag')
     this.tagFilter = this.tagFilter === event.detail.tagId ? null : event.detail.tagId
     this.offset = 0
     this.showList()

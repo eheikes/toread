@@ -1,7 +1,9 @@
+import { log } from './log.js'
+
 export function createApi (baseUrl) {
   return {
     get: function (params) {
-      console.log('*** get()', params)
+      log('API get', params)
       const searchParams = new URLSearchParams(params)
       const url = `${baseUrl}/links?${searchParams}`
       return fetch(url, { method: 'GET', mode: 'cors' }).then(response => {
@@ -13,7 +15,7 @@ export function createApi (baseUrl) {
     },
 
     check: function (params) {
-      console.log('*** check()', params)
+      log('API check', params)
       const searchParams = new URLSearchParams(params)
       searchParams.set('check', 'true')
       const url = `${baseUrl}/links?${searchParams}`
@@ -26,7 +28,7 @@ export function createApi (baseUrl) {
     },
 
     add: function (data) {
-      console.log('*** add()', data)
+      log('API add', data)
       const url = `${baseUrl}/links`
       return fetch(url, {
         method: 'POST',
@@ -42,7 +44,7 @@ export function createApi (baseUrl) {
     },
 
     remove: function (idsArray) {
-      console.log('*** remove()', idsArray)
+      log('API remove', idsArray)
       return Promise.all(
         idsArray.map(id => {
           return fetch(`${baseUrl}/links/${id}`, { method: 'DELETE', mode: 'cors' })
