@@ -128,6 +128,7 @@ export class ToreadApp extends LitElement {
       this.offset = 0
     }
     this.clearSelected()
+    this.highlighted = null
     this.showList()
   }
 
@@ -152,6 +153,7 @@ export class ToreadApp extends LitElement {
   clearSearch (_event) {
     log('Clearing search')
     this.q = ''
+    this.highlighted = null
     this.showList()
   }
 
@@ -169,6 +171,7 @@ export class ToreadApp extends LitElement {
     this.actionInProgress = true
     this.api.remove(this.selectedItems).then(() => {
       this.clearSelected()
+      this.highlighted = null
       this.showList()
     }).finally(() => {
       this.actionInProgress = false
@@ -188,6 +191,7 @@ export class ToreadApp extends LitElement {
 
   pushState = function () {
     const url = new URL(window.location)
+    url.search = ''
     if (this.highlighted !== null) {
       url.searchParams.set('highlighted', this.highlighted)
     }
@@ -205,6 +209,7 @@ export class ToreadApp extends LitElement {
   search (event) {
     this.q = event?.detail?.phrase ?? ''
     this.offset = 0
+    this.highlighted = null
     this.showList()
   }
 
@@ -230,6 +235,7 @@ export class ToreadApp extends LitElement {
     log('Toggling tag')
     this.tagFilter = this.tagFilter === event.detail.tagId ? null : event.detail.tagId
     this.offset = 0
+    this.highlighted = null
     this.showList()
   }
 
