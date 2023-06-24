@@ -1,11 +1,16 @@
 import { log } from './log.js'
 
-export function debounce (func, timeout = 300) {
-  log('debounce', timeout)
-  let timer
-  return (...args) => {
-    clearTimeout(timer)
-    log('restarting timer at', Date.now())
-    timer = setTimeout(() => { log('applying debounce func at', Date.now()); func.apply(this, args) }, timeout)
+const timers = new Map()
+
+export function debounce (eventName, func, timeout = 300) {
+  log('Debouncing', eventName, timeout)
+  const existingTimer = timers.get(eventName)
+  if (existingTimer) {
+    clearTimeout(timers.get(eventName))
   }
+  const newTimer = setTimeout(() => {
+    log(`Applying ${eventName} debounce function`)
+    func.apply(this)
+  }, timeout)
+  timers.set(eventName, newTimer)
 }

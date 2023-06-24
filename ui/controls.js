@@ -1,4 +1,5 @@
 import { LitElement, css, html } from 'lit'
+import { debounce } from './util.js'
 
 export class ToreadControls extends LitElement {
   static properties = {
@@ -109,7 +110,7 @@ export class ToreadControls extends LitElement {
         </div>
         <div class="pure-u-1-2">
           <div class="search pure-button-group" role="group" aria-label="Search">
-            <input class="form-control" name="q" type="text" value=${this.q} placeholder="Search" @keyup=${this.search} ?disabled=${this.disabled} accesskey="s">
+            <input class="form-control" name="q" type="text" value=${this.q} placeholder="Search" @keyup=${{ handleEvent: (event) => debounce('search', () => this.search(event), 250) }} ?disabled=${this.disabled} accesskey="s">
             <span class="input-group-btn">
               <button class="pure-button" ?hidden=${this.q === ''} type="button" aria-label="Clear search" @click=${this.clearSearch}>
               🗙

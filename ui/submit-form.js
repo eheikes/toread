@@ -1,5 +1,6 @@
 import { LitElement, css, html } from 'lit'
 import { createApi } from './api.js'
+import { debounce } from './util.js'
 
 export class ToreadSubmitForm extends LitElement {
   static properties = {
@@ -107,7 +108,7 @@ export class ToreadSubmitForm extends LitElement {
         <fieldset ?disabled=${this.isSaving}>
           <div>
             <label for="new-url" title="Link URL">URL</label>
-            <input id="new-url" type="text" name="url" value="" accesskey="n" @keyup=${this.checkUrl}>
+            <input id="new-url" type="text" name="url" value="" accesskey="n" @keyup=${{ handleEvent: (event) => debounce('checkUrl', () => this.checkUrl(event), 250) }}>
             <div class="error" ?hidden=${!this.isDuplicate}>
               ⚠️ This link already exists<span ?hidden=${!this.isDuplicateDeleted}> (but has been deleted)</span>.
             </div>
