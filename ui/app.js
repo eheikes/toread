@@ -94,7 +94,7 @@ export class ToreadApp extends LitElement {
     super()
 
     this.actionInProgress = false
-    this.highlighted = getParamOrDefault('highlighted', null)
+    this.highlighted = getParamOrDefault('highlighted', null, true)
     this.q = getParamOrDefault('q', '') // search query
     this.offset = getParamOrDefault('offset', 0, true)
     this.limit = getParamOrDefault('limit', 20, true)
@@ -222,7 +222,10 @@ export class ToreadApp extends LitElement {
       count: this.limit ?? ''
     }).then(response => {
       this.tags = response.tags
-      this.links = response.links
+      this.links = response.links.map((link, index) => ({
+        ...link,
+        highlighted: index === this.highlighted
+      }))
       this.stats = {
         ...response.stats,
         total: response.total
