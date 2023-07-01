@@ -1,0 +1,57 @@
+{
+  "name": "toread",
+  "version": "2.0.0",
+  "private": true,
+  "description": "To Read app",
+  "main": "server.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eheikes/toread.git"
+  },
+  "author": "Eric Heikes <eheikes@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/eheikes/toread/issues"
+  },
+  "homepage": "https://github.com/eheikes/toread#readme",
+  "scripts": {
+    "prebuild": "rimraf build",
+    "build": "rollup -c rollup.config.js",
+    "build:watch": "rollup -c rollup.config.js -w",
+    "dev": "run-p build:watch start",
+    "lint": "standard --fix --verbose 'server/**/*.js' 'ui/**/*.js' '*.js'",
+    "start": "nodemon server/app.js",
+    "test": "true"
+  },
+  "dependencies": {
+    "boolean": "^3.2.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "html-entities": "^2.3.3",
+    "knex": "^2.4.2",
+    "mysql2": "^3.2.3",
+    "node-fetch": "^3.3.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
+    "lit": "^2.7.4",
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.24.0",
+    "standard": "^17.0.0"
+  },
+  "standard": {
+    "env": [
+      "browser",
+      "jasmine",
+      "node"
+    ]
+  }
+}
