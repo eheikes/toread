@@ -18,6 +18,11 @@ module.factory('toreadService', function(toreadFactory) {
     return toreadFactory.get(opts).$promise;
   }
 
+  function getTitle(opts) {
+    opts.gettitle = true;
+    return toreadFactory.get(opts).$promise;
+  }
+
   function add(data) {
     return toreadFactory.save(data).$promise;
   }
@@ -29,6 +34,7 @@ module.factory('toreadService', function(toreadFactory) {
   return {
     get: get,
     check: check,
+    getTitle: getTitle,
     add: add,
     remove: remove
   };
@@ -76,6 +82,9 @@ module.controller('addController', function($scope, toreadService) {
       result.links.forEach(function(link) {
         if (!link.deleted) { $scope.isDuplicateDeleted = false; }
       });
+    });
+    toreadService.getTitle({ url: newData }).then(function(result) {
+      $scope.data.title = result.title;
     });
   });
 });
