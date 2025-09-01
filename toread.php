@@ -49,6 +49,10 @@
                   (but has been deleted)</span>.</div>
               </div>
               <div class="form-group">
+                <label for="new-title" title="Link title">Title</label>
+                <input id="new-url" type="text" name="title" ng-model="data.title" value="" class="form-control">
+              </div>
+              <div class="form-group">
                 <label for="new-tags" title="Link tags (separate with commas)">Tags</label>
                 <input id="new-tags" type="text" name="tags" ng-model="data.tags" value="" class="form-control">
               </div>

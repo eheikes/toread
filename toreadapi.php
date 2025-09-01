@@ -48,6 +48,55 @@
     return '#' . $palette[$index];
   }
 
+  function getPageInfo($url) {
+    $html = NULL; // default
+    $title = htmlentities($url); // default
+    if (function_exists("curl_init"))
+    {
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch, CURLOPT_HEADER, false);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+      curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+      curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "Accept-Language: en-US,en;q=0.9",
+        "Accept-Encoding: identity" // turn off compression
+      ));
+      $result = curl_exec($ch);
+      if ($result !== false)
+      {
+        // Look for a charset definition in the page.
+        // Convert to UTF-8 if necessary.
+        if (preg_match("#<meta[^<]*charset=([a-z0-9_-]+)#is", $result, $matches)) {
+          if (strtolower($matches[1]) !== 'utf-8') {
+            $result = mb_convert_encoding($result, 'UTF-8', $matches[1]);
+          }
+        }
+
+        // Save the <title>.
+        $cleanedHtml = preg_replace('#<script.*</script>#isU', '', $result);
+        $cleanedHtml = preg_replace('#<style.*</style>#isU', '', $cleanedHtml);
+        $cleanedHtml = preg_replace('#<svg.*</svg>#isU', '', $cleanedHtml);
+        if (preg_match("#<title[^>]*>(.*)</title>#isU", $cleanedHtml, $matches)
+        and $matches[1] != "")
+        {
+          $title = mb_substr($matches[1], 0, $maxTitleLength, 'UTF-8');
+        }
+        // Save the page, if it's HTML.
+        if (stripos($result, '<html') !== false) {
+          $html = $result;
+        }
+      }
+    }
+    return array(
+      'title' => $title,
+      'html'  => $html,
+    );
+  }
+
   // Retrieves the stats.
   function getStats() {
     global $dbh;
@@ -135,6 +184,13 @@
   // Retrieves the links.
   function getEntry() {
     global $config, $dbh;
+
+    if (isset($_GET['gettitle'])) {
+      $page = getPageInfo(@$_GET['url']);
+      return array(
+        'title'  => $page['title'],
+      );
+    }
 
     $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
     $count  = isset($_GET['count'])  ? intval($_GET['count'])  : 20;
@@ -231,55 +287,16 @@
 
     $response = array();
 
-    // Retrieve the page title.
-    $html = NULL; // default
-    $title = htmlentities($url); // default
-    if (function_exists("curl_init"))
-    {
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $url);
-      curl_setopt($ch, CURLOPT_HEADER, false);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-      curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-      curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-        "Accept-Language: en-US,en;q=0.9",
-        "Accept-Encoding: identity" // turn off compression
-      ));
-      $result = curl_exec($ch);
-      if ($result !== false)
-      {
-        // Look for a charset definition in the page.
-        // Convert to UTF-8 if necessary.
-        if (preg_match("#<meta[^<]*charset=([a-z0-9_-]+)#is", $result, $matches)) {
-          if (strtolower($matches[1]) !== 'utf-8') {
-            $result = mb_convert_encoding($result, 'UTF-8', $matches[1]);
-          }
-        }
-
-        // Save the <title>.
-        $cleanedHtml = preg_replace('#<script.*</script>#isU', '', $result);
-        $cleanedHtml = preg_replace('#<style.*</style>#isU', '', $cleanedHtml);
-        $cleanedHtml = preg_replace('#<svg.*</svg>#isU', '', $cleanedHtml);
-        if (preg_match("#<title[^>]*>(.*)</title>#isU", $cleanedHtml, $matches)
-        and $matches[1] != "")
-        {
-          $title = mb_substr($matches[1], 0, $maxTitleLength, 'UTF-8');
-        }
-        // Save the page, if it's HTML.
-        if (stripos($result, '<html') !== false) {
-          $html = $result;
-        }
-      }
-    }
+    // Retrieve the page title and HTML.
+    $page = getPageInfo($POST->url);
+    $html = $page['html'];
+    $title = $page['title'];
 
     // Add the link.
     $sql = "INSERT INTO links"
          . " SET created = NOW()"
          . " , url = " . $dbh->quote($url)
-         . " , title = " . $dbh->quote($title)
+         . " , title = " . ($POST->title == '' ? $dbh->quote($title) : $dbh->quote($POST->title))
          . " , snapshot = " . (is_null($html) ? "NULL" : $dbh->quote($html))
          . " , keywords = " . ($keywords == '' ? "NULL" : $dbh->quote($keywords));
     $success = $dbh->exec($sql);
